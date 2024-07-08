@@ -3,6 +3,8 @@ import React from 'react'
 import { MdSpaceDashboard } from "react-icons/md";
 import { GrProjects } from "react-icons/gr";
 import { RiShoppingBag4Line } from "react-icons/ri";
+import { FcTemplate } from 'react-icons/fc';
+import { CgTemplate } from 'react-icons/cg';
 
 
 export default function SideNav() {
@@ -29,6 +31,12 @@ export default function SideNav() {
                 <div className=' flex items-center gap-1 mx-3'>
                     <RiShoppingBag4Line className=' h-5 w-5'/>
                     Brands
+                </div>
+            </a>
+            <a href="/dashboard" className=' w-full  hover:bg-zinc-700 py-2 rounded-xl'>
+                <div className=' flex items-center gap-1 mx-3'>
+                    <CgTemplate className=' fill-white h-5 w-5'/>
+                    Templates
                 </div>
             </a>
         </div>

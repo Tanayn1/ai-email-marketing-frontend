@@ -6,10 +6,12 @@ import { fetchBrands } from '../actions';
 import { toast } from 'sonner';
 import CreateNewBrandModal from './createNewBrandModal';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function Brands() {
     const [brands, setBrands] = useState<null | Array<Brand>>(null);
-    const [isShow, setIsShow] = useState<boolean>(false)
+    const [isShow, setIsShow] = useState<boolean>(false);
+    const router = useRouter()
 
     const fetchData = async () => {
         const response = await fetchBrands()
@@ -26,7 +28,7 @@ export default function Brands() {
     <div className=' '>
         <div className=' m-10'>
             <h1 className=' text-3xl font-semibold'>Brands</h1>
-            <div className=' mt-4 mx-7 grid grid-cols-3'>
+            <div className=' mt-4 mx-7 grid grid-cols-4'>
                 <div onClick={()=>{setIsShow(true)}} className=' w-[250px] h-[150px] bg-lime-400 rounded-xl cursor-pointer  hover:bg-lime-500 '>
                     <div className=' flex justify-center h-[150px] items-center'>
                         <FaPlus className=' h-[40px] w-[40px] fill-zinc-700'/>
@@ -35,13 +37,13 @@ export default function Brands() {
                 {brands?.map((brand, index)=>{
                    
                     return (
-                        <div key={index} className=' glass-container rounded-xl w-[250px] h-[150px]'>
+                        <div key={index} onClick={()=>{router.push(`/dashboard/brands/brand?id=${brand.id}`)}} className=' glass-container hover:opacity-45 cursor-pointer rounded-xl w-[250px] h-[150px]'>
                             <div className=' flex flex-col items-center'>
                                 { 
                                 isSvg(brand.logo!) ? <RenderHTML htmlString={brand.logo!}/> :
                                     <Image alt={`logo ${index}`} src={brand.logo!} width={100} height={100}/>
                                     }
-                                <h1>{brand.brand_name}</h1> 
+                                <h1 className=' text-xl font-semibold'>{brand.brand_name}</h1> 
                             </div>
                         </div>
                     )
