@@ -111,3 +111,51 @@ export async function createProduct(brandId: string, url : string) {
         console.log(error)
     }
 }
+
+export async function fetchProductById(prodId : string) {
+    try {
+        const token = cookies().get('Token')?.value;
+        const response = await fetch(`${process.env.BACKEND_URL}/products/getProductById/${prodId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+           
+        });
+        const data = await response.json()
+        if (response.ok) {
+            return data.product
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function updateProduct(product_id : string, price : string, product_name: string, 
+    images: Array<string>, description: string) {
+    try {
+        const token = cookies().get('Token')?.value;
+        const response = await fetch(`${process.env.BACKEND_URL}/products/updateProduct`, {
+            method: 'PATCH',
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                product_id: product_id,
+                price: price,
+                product_name: product_name,
+                images: images,
+                description: description
+            })
+        });
+        const data = await response.json()
+        console.log(data)
+        if (response.ok) {
+            return data.updatedProd
+        }
+    } catch (error) {
+        console.log(error)
+    }
+
+}

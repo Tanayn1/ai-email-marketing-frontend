@@ -21,7 +21,7 @@ export default function SideNav() {
                     Dashboard
                 </div>
             </a>
-            <a href="" className=' w-full  hover:bg-zinc-700 py-2 rounded-xl'>
+            <a href="/dashboard/projects" className=' w-full  hover:bg-zinc-700 py-2 rounded-xl'>
                 <div className=' flex items-center gap-2 mx-3'>
                     <GrProjects className=' h-5 w-5'/>
                     Projects

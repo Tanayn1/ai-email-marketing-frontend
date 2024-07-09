@@ -7,14 +7,16 @@ import AddProductModal from './addProductModal';
 import RenderImage from './renderImage';
 import { Skeleton } from '@/components/ui/skeleton';
 import SideEditProduct from './sideEditProduct';
+import { Product } from '../../../../../types/types';
 
 interface Products {
     brandId: string
 }
 
 export default function Products({ brandId } : Products) {
-    const [products, setProducts] = useState<Array<any>>([]);
-    const [showEditProduct, setShowEditProduct] = useState<boolean>(false)
+    const [products, setProducts] = useState<Array<Product>>([]);
+    const [showEditProduct, setShowEditProduct] = useState<boolean>(false);
+    const [selectedProduct, setSelectedProduct] = useState<null | string>(null)
     const [show, setShow] = useState<boolean>(false)
     const fetchData= async () => {
         const response = await fetchProducts(brandId);
@@ -38,7 +40,7 @@ export default function Products({ brandId } : Products) {
             </div>
             {products.map((product)=>{
                 return (
-                    <div onClick={()=>{setShowEditProduct(true)}} className=' hover:opacity-50 cursor-pointer bg-zinc-700 rounded-xl h-[200px] w-[200px]'>
+                    <div onClick={()=>{setSelectedProduct(product.id);setShowEditProduct(true)}} className=' hover:opacity-50 cursor-pointer bg-zinc-700 rounded-xl h-[200px] w-[200px]'>
                         <div className=' flex justify-center overflow-hidden rounded-t-xl fade-mask-bottom h-[100px] w-[200px]'>
                             { 
                             product.images.length !== 0 ? 
@@ -51,7 +53,7 @@ export default function Products({ brandId } : Products) {
             })}
         </div>
         <AddProductModal setFinishedScraping={(value : boolean)=>{fetchData(); setShow(value)}} brandId={brandId} isShow={show} setShow={(value : boolean) => {setShow(value)}}/>
-        <SideEditProduct setIsShow={(value : boolean)=>{setShowEditProduct(value)}} isShow={showEditProduct}/>
+         { selectedProduct ? <SideEditProduct selectedProduct={selectedProduct!} setIsShow={(value : boolean)=>{setShowEditProduct(value)}} isShow={showEditProduct}/> : ''}
     </div>
   )
 }

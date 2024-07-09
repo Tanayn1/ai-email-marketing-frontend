@@ -8,3 +8,14 @@ export interface Brand {
     fonts: any,
     created_at: string
 }
+
+export interface Product {
+    id: string,
+    brand_id: string,
+    price: string,
+    product_url: string,
+    product_name: string,
+    images: Array<string>,
+    description: string
+    created_at: string
+}
