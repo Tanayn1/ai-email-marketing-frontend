@@ -1,58 +1,31 @@
 'use client'
-import React, { useEffect } from 'react'
-import 'grapesjs/dist/css/grapes.min.css';
-import grapesjs from 'grapesjs';
+import React from 'react'
+import {Editor, Frame, Element, useNode} from "@craftjs/core";
+import LeftSideBar from './leftSideBar';
+import { Text } from './draggableComponents/text';
+import { Container } from './container';
+import { Button } from '@/components/ui/button';
+import RightSideBar from './rightSideBar';
+import Navbar from './navbar';
 
-export default function Editor() {
-    useEffect(()=>{
-        const editor = grapesjs.init({
-          container: '#gjs',
-          fromElement: true,
-          height: '300px',
-          width: 'auto',
-          storageManager: false,
-          panels: { defaults: [] },
-          blockManager: {
-            appendTo: '#blocks',
-            blocks: [
-              {
-                id: 'section', // id is mandatory
-                label: '<b>Section</b>', // You can use HTML/SVG inside labels
-                attributes: { class:'gjs-block-section' },
-                content: `<section>
-                  <h1>This is a simple title</h1>
-                  <div>This is just a Lorem text: Lorem ipsum dolor sit amet</div>
-                </section>`,
-              }, {
-                id: 'text',
-                label: 'Text',
-                content: '<div data-gjs-type="text">Insert your text here</div>',
-              }, {
-                id: 'image',
-                label: 'Image',
-                // Select the component once it's dropped
-                select: true,
-                // You can pass components as a JSON instead of a simple HTML string,
-                // in this case we also use a defined component type `image`
-                content: { type: 'image' },
-                // This triggers `active` event on dropped components and the `image`
-                // reacts by opening the AssetManager
-                activate: true,
-              }
-            ]
-          },
-        })
-        return () => {
-          editor.destroy();
-        };
-    
-      },[])
+
+export default function MailSparkEditor() {
   return (
-        <>
-        <div id='gjs'>
-
-        </div>
-        <div id='blocks'></div>
-        </>
+    <div>
+        <Editor resolver={{Text, Container, Button}}>
+          <Navbar/>
+          <LeftSideBar/>
+          <div className=' flex justify-center'>
+            <Frame>
+              <Element is="div" canvas>
+                <h1>Hello world2</h1>
+                <Text fontSize={12} text='hellow'/>
+              </Element>
+            </Frame>
+          </div>
+          <RightSideBar/>
+        </Editor>
+    </div>
   )
 }
+

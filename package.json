@@ -9,16 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@craftjs/core": "^0.2.8",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tabs": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.1.6",
-    "grapesjs": "^0.21.12",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.400.0",
     "next": "14.2.4",
     "react": "^18",
+    "react-contenteditable": "^3.3.7",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
     "sonner": "^1.5.0",
