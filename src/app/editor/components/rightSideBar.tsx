@@ -2,6 +2,9 @@ import React from 'react'
 import { useEditor } from "@craftjs/core";
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { FaAlignJustify, FaAlignLeft, FaAlignRight } from 'react-icons/fa';
+import TextOptions from './sideBarOptions/right/textOptions';
+import ButtonOptions from './sideBarOptions/right/buttonOptions';
 
 
 export default function RightSideBar() {
@@ -24,16 +27,12 @@ export default function RightSideBar() {
     }
   });
   return (
-    <div className=' fixed right-0 top-[70px] w-[220px] bg-zinc-900 h-screen'>
+    <div className=' fixed right-0 top-[70px] w-[320px] bg-zinc-900 h-screen'>
         {selected ? 
         <div>
           <Button onClick={()=>{actions.delete(selected.id)}}>Delete</Button> 
-          {selected.name === 'Text' && 
-          <div>
-            <Input type='number' value={selected.props.fontSize}  onChange={(e)=>{
-              actions.setProp(selected.id, (props)=>{props.fontSize = e.target.value})
-              }} className='w-[80px] '/>
-          </div>}
+          {selected.name === 'Text' && <TextOptions selected={selected} actions={actions}/>}
+          {selected.name === 'DraggableButton' && <ButtonOptions selected={selected} actions={actions}/>}
         </div>: ''}
     </div>
   )

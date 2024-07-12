@@ -6,11 +6,20 @@ import ContentEditable from 'react-contenteditable'
 
 interface Text {
     text: string,
-    fontSize: number
+    fontSize: number,
+    align: 'justify-center' | 'justify-end' | 'justify-start',
+    italic: boolean,
+    fontWeight: number,
+    textColor: string,
+    fontFamily: string,
+    paddingT: number,
+    paddingB: number, 
+    paddingl: number,
+    paddingR: number
 }
 
 
-export const Text = ({text, fontSize} : Text) => {
+export const Text = ({text, fontSize, align, italic, fontWeight, textColor, fontFamily, paddingT, paddingB, paddingR, paddingl} : Text) => {
   const { connectors: {connect, drag}, hasSelectedNode, hasDraggedNode , actions: {setProp} } = useNode((state)=>({
     hasSelectedNode: state.events.selected,
     hasDraggedNode: state.events.dragged,
@@ -20,11 +29,17 @@ export const Text = ({text, fontSize} : Text) => {
   useEffect(() => {hasSelectedNode && setEditable(true)},[hasSelectedNode]);
 
   useEffect(()=>{hasDraggedNode && setEditable(false)},[hasDraggedNode])
+  const getValidPadding = (value : any) => {
+    return !isNaN(value) && value !== undefined && value !== null ? value : 0;
+  };
   return (
      <div 
      ref={ref => {connect(drag(ref!))}}
+     className={` flex ${align} ${italic === true && 'italic'}    `}
+     style={{ fontWeight: fontWeight,}}
     >
       <ContentEditable
+      key={textColor}
       disabled={!editable}
         html={text} 
         onChange={e => 
@@ -33,7 +48,9 @@ export const Text = ({text, fontSize} : Text) => {
           )
         } 
         tagName="p"
-        style={{fontSize: `${fontSize}px`}}
+        className={``}
+        style={{fontSize: `${fontSize}px`, background: textColor, WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent', fontFamily: fontFamily, padding: `${getValidPadding(paddingT)}px ${getValidPadding(paddingR)}px ${getValidPadding(paddingB)}px ${getValidPadding(paddingl)}px`}}
       />
     </div>
   )
