@@ -8,12 +8,14 @@ import { Button } from '@/components/ui/button';
 import RightSideBar from './rightSideBar';
 import Navbar from './navbar';
 import DraggableButton from './draggableComponents/draggableButton';
+import DraggableImage from './draggableComponents/image';
+import TwoColumns from './draggableComponents/twoColumns';
 
 
 export default function MailSparkEditor() {
   return (
     <div className="flex flex-col h-screen ">
-      <Editor resolver={{ Text, Container, Button, DraggableButton }}>
+      <Editor resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns }}>
         <Navbar />
         <div className="flex flex-grow">
           <LeftSideBar />

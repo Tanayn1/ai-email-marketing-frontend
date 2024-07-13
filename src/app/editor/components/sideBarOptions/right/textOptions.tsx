@@ -29,14 +29,11 @@ interface TextOptions {
 export default function TextOptions({ actions, selected } : TextOptions) {
  if (selected) return (
     <div className=' m-10'>
-    <Input type='number' value={selected.props.fontSize}  onChange={(e)=>{
-      actions.setProp(selected.id, (props)=>{props.fontSize = e.target.value})
-      }} className='w-[80px] '/>
       <div className=' mt-3'>
-        <h1 className=' text-sm font-semibold mb-2'>Text</h1>
+        <h1 className=' text-sm font-semibold mb-2'>Content</h1>
         <Input type='text' value={selected.props.text}  onChange={(e)=>{
         actions.setProp(selected.id, (props)=>{props.text = e.target.value})
-        }} className=' bg-zinc-900 '/>
+        }} className=' bg-zinc-900 text-xs '/>
       </div>
 
       <div className=' mt-4'>
@@ -57,7 +54,7 @@ export default function TextOptions({ actions, selected } : TextOptions) {
         </div>
       </div>
       <h1 className='text-sm font-semibold mt-4 mb-2'>Text Options</h1>
-        <div className=' flex gap-10 '>
+        <div className=' flex gap-5 '>
             <div className=''>
                 <h1 className=' text-xs font-medium text-zinc-200  mb-2'>Italic</h1>
                 <Button onClick={()=>{actions.setProp(selected.id, (props)=>{
@@ -73,6 +70,12 @@ export default function TextOptions({ actions, selected } : TextOptions) {
             <div>
                 <h1 className=' text-xs font-medium text-zinc-200 mb-2'>Font Weight</h1>
                 <FontWeightDropdown actions={actions} selected={selected}/>
+            </div>
+            <div>
+                <h1 className=' text-xs font-medium text-zinc-200 mb-2'>Font Size</h1>
+                <Input type='number' value={selected.props.fontSize}  onChange={(e)=>{
+                    actions.setProp(selected.id, (props)=>{props.fontSize = e.target.value})
+                    }} className='w-[60px] bg-zinc-900 text-xs text-zinc-400 h-9 '/>
             </div>
         </div>
         <div className=' mt-3'>

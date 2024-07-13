@@ -50,7 +50,12 @@ export const Text = ({text, fontSize, align, italic, fontWeight, textColor, font
         tagName="p"
         className={``}
         style={{fontSize: `${fontSize}px`, background: textColor, WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent', fontFamily: fontFamily, padding: `${getValidPadding(paddingT)}px ${getValidPadding(paddingR)}px ${getValidPadding(paddingB)}px ${getValidPadding(paddingl)}px`}}
+        WebkitTextFillColor: 'transparent', fontFamily: fontFamily, 
+        paddingTop: `${paddingT}px`,
+        paddingBottom: `${paddingB}px`,
+        paddingRight: `${paddingR}px`,
+        paddingLeft: `${paddingl}px`,
+      }}
       />
     </div>
   )

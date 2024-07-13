@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { FaAlignJustify, FaAlignLeft, FaAlignRight } from 'react-icons/fa';
 import TextOptions from './sideBarOptions/right/textOptions';
 import ButtonOptions from './sideBarOptions/right/buttonOptions';
+import ImageOptions from './sideBarOptions/right/imageOptions';
 
 
 export default function RightSideBar() {
@@ -33,6 +34,7 @@ export default function RightSideBar() {
           <Button onClick={()=>{actions.delete(selected.id)}}>Delete</Button> 
           {selected.name === 'Text' && <TextOptions selected={selected} actions={actions}/>}
           {selected.name === 'DraggableButton' && <ButtonOptions selected={selected} actions={actions}/>}
+          {selected.name === 'DraggableImage' && <ImageOptions selected={selected} actions={actions}/>}
         </div>: ''}
     </div>
   )
