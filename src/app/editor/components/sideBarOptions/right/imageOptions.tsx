@@ -1,4 +1,4 @@
-import { Options } from '@/app/editor/types'
+import { Options } from '@/app/editor/types/types'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Slider } from '@/components/ui/slider'
@@ -7,7 +7,7 @@ import { CiAlignCenterH, CiAlignLeft, CiAlignRight } from 'react-icons/ci'
 
 export default function ImageOptions({ actions, selected } : Options) {
  if (selected) return (
-    <div className=' m-10'>
+    <div className=' '>
         <div>
         <h1 className=' text-sm font-semibold mb-2'>Alignment</h1>
             <div className=' flex  gap-4'>

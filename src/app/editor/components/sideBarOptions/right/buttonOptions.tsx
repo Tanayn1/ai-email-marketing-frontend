@@ -1,4 +1,3 @@
-import { Options } from '@/app/editor/types'
 import { GradientPicker } from '@/components/colorPicker'
 import { Input } from '@/components/ui/input'
 import React from 'react'
@@ -10,13 +9,14 @@ import { Button } from '@/components/ui/button'
 import { CiAlignLeft } from "react-icons/ci";
 import { CiAlignCenterH } from "react-icons/ci";
 import { CiAlignRight } from "react-icons/ci";
+import { Options } from '@/app/editor/types/types'
 
 //add fonts tho
 
 export default function ButtonOptions({ actions, selected } : Options) {
 if (selected) return (
   <ScrollArea className=' h-[600px] '>
-    <div className=' m-10'>
+    <div className=''>
       <div className=' mb-4'>
         <h1 className=' text-sm font-semibold mb-2'> Content</h1>
         <Input value={selected.props.text} onChange={(e)=>{actions.setProp(selected.id, (props)=>{props.text = e.target.value})}} className=' bg-zinc-900 text-xs'/>

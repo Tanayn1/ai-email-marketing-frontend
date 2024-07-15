@@ -28,7 +28,7 @@ interface TextOptions {
 
 export default function TextOptions({ actions, selected } : TextOptions) {
  if (selected) return (
-    <div className=' m-10'>
+    <div className=''>
       <div className=' mt-3'>
         <h1 className=' text-sm font-semibold mb-2'>Content</h1>
         <Input type='text' value={selected.props.text}  onChange={(e)=>{
@@ -39,16 +39,16 @@ export default function TextOptions({ actions, selected } : TextOptions) {
       <div className=' mt-4'>
         <h1 className=' text-sm font-semibold mb-2'>Align</h1>
         <div className=' flex  gap-4'>
-          <Button onClick={()=>{actions.setProp(selected.id, (props)=>{props.align = 'justify-start'})}} 
-          variant={'outline'} className=' shadow bg-zinc-900 border-zinc-700 text-zinc-400'>
+          <Button onClick={()=>{actions.setProp(selected.id, (props)=>{props.align = 'start'})}} 
+          variant={'outline'} className={`${selected.props.align === 'start' ? ' bg-white text-black' : 'bg-zinc-900 text-zinc-400'} shadow  border-zinc-700 `}>
             <FaAlignLeft className=''/>
           </Button>
-          <Button onClick={()=>{actions.setProp(selected.id, (props)=>{props.align = 'justify-center'})}} 
-          variant={'outline'} className=' shadow bg-zinc-900 border-zinc-700 text-zinc-400'>
+          <Button onClick={()=>{actions.setProp(selected.id, (props)=>{props.align = 'center'})}} 
+          variant={'outline'} className={`${selected.props.align === 'center' ? ' bg-white text-black' : 'bg-zinc-900 text-zinc-400'} shadow  border-zinc-700 `}>
             <FaAlignJustify/>
           </Button>
-          <Button onClick={()=>{actions.setProp(selected.id, (props)=>{props.align = 'justify-end'})}} 
-          variant={'outline'} className=' shadow bg-zinc-900 border-zinc-700 text-zinc-400'>
+          <Button onClick={()=>{actions.setProp(selected.id, (props)=>{props.align = 'end'})}} 
+          variant={'outline'} className={`${selected.props.align === 'end' ? ' bg-white text-black' : 'bg-zinc-900 text-zinc-400'} shadow  border-zinc-700 `}>
             <FaAlignRight/>
           </Button>
         </div>

@@ -7,7 +7,7 @@ import ContentEditable from 'react-contenteditable'
 interface Text {
     text: string,
     fontSize: number,
-    align: 'justify-center' | 'justify-end' | 'justify-start',
+    align: 'center' | 'end' | 'start',
     italic: boolean,
     fontWeight: number,
     textColor: string,
@@ -36,7 +36,7 @@ export const Text = ({text, fontSize, align, italic, fontWeight, textColor, font
      <div 
      ref={ref => {connect(drag(ref!))}}
      className={` flex ${align} ${italic === true && 'italic'}    `}
-     style={{ fontWeight: fontWeight,}}
+     style={{ fontWeight: fontWeight, display: 'flex', justifyContent: align}}
     >
       <ContentEditable
       key={textColor}
@@ -55,6 +55,12 @@ export const Text = ({text, fontSize, align, italic, fontWeight, textColor, font
         paddingBottom: `${paddingB}px`,
         paddingRight: `${paddingR}px`,
         paddingLeft: `${paddingl}px`,
+        whiteSpace: 'pre-wrap', // Ensures that the text wraps
+        wordWrap: 'break-word', // Ensures that long words break to the next line
+        overflow: 'hidden', // Prevents overflowing content
+        textOverflow: 'ellipsis', // Adds ellipsis (...) for overflowing text
+        maxWidth: '100%' // Ensures the element does not exceed the container width
+        
       }}
       />
     </div>
