@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {Editor, Frame, Element, useNode} from "@craftjs/core";
 import LeftSideBar from './leftSideBar';
 import { Text } from './draggableComponents/text';
@@ -13,18 +13,52 @@ import TwoColumns, { Column } from './draggableComponents/twoColumns';
 import Placeholder from './draggableComponents/placeholder';
 import ThreeColumns from './sideBarOptions/right/threeColumns';
 import CanvasContainer from './CanvasContainer';
-
+import { useRouter, useSearchParams } from 'next/navigation';
+import { EditorSession } from '../../../../types/types';
+import { fetchSession } from '../actions';
+import { Divide, Loader2 } from 'lucide-react';
+import lz from "lzutf8";
 
 export default function MailSparkEditor() {
+  const [session, setSession] = useState<null | EditorSession>(null);
+  const [json, setJson] = useState<null | any>(null)
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const sessionId = searchParams.get('session');
+
+  const fetchData = async ()=>{
+    if (sessionId) {
+    const data: EditorSession | null = await fetchSession(sessionId);
+    if (data) {
+      setSession(data)
+      if (data?.email_saves.length !== 0) {
+        console.log(data)
+        console.log(data?.email_saves[data?.email_saves.length - 1].save);
+        const j = lz.decompress(lz.decodeBase64(data?.email_saves[data?.email_saves.length - 1].save));
+        setJson(j);
+      }
+
+    } else {
+      router.push('/dashboard')
+
+    } 
+  } else {
+    router.push('/dashboard')
+  }
+  }
+  useEffect(()=>{
+    fetchData();
+  },[])
+ if (sessionId && session && json  ) {
   return (
     <div className="flex flex-col h-screen ">
-      <Editor resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer }}>
-        <Navbar />
+      <Editor  resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer }}>
+        <Navbar  session={session} />
         <div className="flex flex-grow">
           <LeftSideBar />
           <div className='flex justify-center items-center flex-grow'>
             <div className='w-[700px] mt-[70px] h-[800px] overflow-x-clip border shadow-2xl border-gray-300 text-black bg-white '>
-              <Frame>
+              <Frame json={json}>
                 <Element is={CanvasContainer} backgroundColor='#ffffff'  canvas>
                   <Text paddingT={0} paddingR={0} paddingl={0} paddingB={0} fontFamily='Arial' textColor='linear-gradient(to top left,#acb6e5,#86fde8)' fontWeight={800} italic={false} align='start' fontSize={22} text='hello'/>
                 </Element>
@@ -35,6 +69,31 @@ export default function MailSparkEditor() {
         </div>
       </Editor>
     </div>
-  )
+  )} else if (sessionId && session) {
+    <div className="flex flex-col h-screen ">
+    <Editor  resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer }}>
+      <Navbar  session={session} />
+      <div className="flex flex-grow">
+        <LeftSideBar />
+        <div className='flex justify-center items-center flex-grow'>
+          <div className='w-[700px] mt-[70px] h-[800px] overflow-x-clip border shadow-2xl border-gray-300 text-black bg-white '>
+            <Frame >
+              <Element is={CanvasContainer} backgroundColor='#ffffff'  canvas>
+                <Text paddingT={0} paddingR={0} paddingl={0} paddingB={0} fontFamily='Arial' textColor='linear-gradient(to top left,#acb6e5,#86fde8)' fontWeight={800} italic={false} align='start' fontSize={22} text='hello'/>
+              </Element>
+            </Frame>
+          </div>
+        </div>
+        <RightSideBar />
+      </div>
+    </Editor>
+  </div>
+  } else {
+    return (
+    <div className=' flex justify-center h-screen items-center'>
+      <Loader2 className=' h-28 w-28 animate-spin'/>
+    </div>
+    )
+  }
 }
 

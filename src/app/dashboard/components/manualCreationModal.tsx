@@ -2,7 +2,8 @@ import { Button } from '@/components/ui/button'
 import React, { useEffect, useState } from 'react'
 import { Brand, Product } from '../../../../types/types'
 import { fetchBrands, fetchProductById } from '../brands/actions';
-import { fetchProductsByBrandId } from '../actions';
+import { createEditSession, fetchProductsByBrandId } from '../actions';
+import { useRouter } from 'next/navigation';
 
 interface ManualCreationModal {
     isShow: boolean,
@@ -14,17 +15,22 @@ export default function ManualCreationModal({ isShow, setShow } : ManualCreation
     const [brands, setBrands] = useState<null | Array<Brand>>(null)
     const [selectedProduct, setSelectedProduct] = useState<null | Product>();
     const [products, setProducts] = useState<null | Array<Product>>(null);
-    const [buttonDisable, setButtonDisable] = useState<boolean>(true);
     const [productsDisable, setProductsDisable] = useState<boolean>(true);
+    const router = useRouter();
 
     const fetchB = async ()=>{
         const data : Array<Brand> = await fetchBrands()
         setBrands(data)
+        setSelectedBrand(data[0].id)
     }
 
     const fetchP = async ()=>{
-        const data : Array<Product> = await fetchProductsByBrandId();
-        setProducts(products)
+        if (selctedBrand) {
+            const data : Array<Product> = await fetchProductsByBrandId(selctedBrand);
+            setProducts(data)
+            setSelectedProduct(data[0])
+        }
+
     }
    
     useEffect(()=>{
@@ -34,14 +40,18 @@ export default function ManualCreationModal({ isShow, setShow } : ManualCreation
     useEffect(()=>{
         if (selctedBrand) {
             setProductsDisable(false)
+            fetchP()
         }
     },[selctedBrand])
 
-    useEffect(()=>{
-        if (selctedBrand && selectedProduct) {
-            setButtonDisable(false)
+
+
+    const handleCreateEditSession = async ()=>{
+        if (selectedProduct) {
+            const id = await createEditSession(selectedProduct)
+            router.push(`/editor?session=${id}`)
         }
-    },[])
+    }
 
     if (isShow) {return (
     <div className=' fixed inset-0 backdrop-blur-lg flex flex-col justify-center items-center z-10'>
@@ -63,10 +73,13 @@ export default function ManualCreationModal({ isShow, setShow } : ManualCreation
                     </select>
                     <h1 className=' font-semibold text-zinc-300 mt-4'>Select Product</h1>
                     <select disabled={productsDisable} className=' w-full mt-3 bg-zinc-900 border border-zinc-700 rounded-md p-2 px-2 text-xs'name="SelectBrand" id="SelectBrand">
-                        <option disabled value="Select">Select Brand</option>
+                        <option disabled value="Select">Select Products</option>
+                        {products?.map((product)=>{
+                            return <option value={product.id}>{product.product_name}</option>
+                        })}
                     </select>
 
-                    <Button disabled={buttonDisable} className=' w-full mt-3'>Continue to editor</Button>
+                    <Button onClick={handleCreateEditSession}  className=' w-full mt-3'>Continue to editor</Button>
                     <p className=' text-xs text-zinc-300 text-center my-2'>or</p>
                     <a href="/dashboard/templates" className=' text-xs font-semibold text-lime-400 flex justify-center'>
                         Start from template

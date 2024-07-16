@@ -19,3 +19,13 @@ export interface Product {
     description: string
     created_at: string
 }
+
+export interface EditorSession {
+    id : string 
+    session_name: string
+    user_id: string
+    brand_id: string
+    product_id: string
+    email_saves: Array<any> 
+    created_at: string
+}
