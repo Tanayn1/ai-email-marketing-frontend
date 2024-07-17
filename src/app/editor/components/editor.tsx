@@ -18,6 +18,10 @@ import { EditorSession } from '../../../../types/types';
 import { fetchSession } from '../actions';
 import { Divide, Loader2 } from 'lucide-react';
 import lz from "lzutf8";
+import Hero from './draggableComponents/hero';
+import CustomisableContainer from './draggableComponents/customisableContainer';
+import Testimonials from './draggableComponents/testimony';
+import { MdOutlineStarPurple500 } from 'react-icons/md';
 
 export default function MailSparkEditor() {
   const [session, setSession] = useState<null | EditorSession>(null);
@@ -52,7 +56,7 @@ export default function MailSparkEditor() {
  if (sessionId && session && json  ) {
   return (
     <div className="flex flex-col h-screen ">
-      <Editor  resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer }}>
+      <Editor  resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer, Hero, CustomisableContainer, Testimonials, MdOutlineStarPurple500 }}>
         <Navbar  session={session} />
         <div className="flex flex-grow">
           <LeftSideBar />
@@ -71,15 +75,15 @@ export default function MailSparkEditor() {
     </div>
   )} else if (sessionId && session) {
     <div className="flex flex-col h-screen ">
-    <Editor  resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer }}>
+    <Editor  resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer, Hero, CustomisableContainer, Testimonials, MdOutlineStarPurple500 }}>
       <Navbar  session={session} />
       <div className="flex flex-grow">
         <LeftSideBar />
         <div className='flex justify-center items-center flex-grow'>
-          <div className='w-[700px] mt-[70px] h-[800px] overflow-x-clip border shadow-2xl border-gray-300 text-black bg-white '>
+          <div className='w-[700px] mt-[70px] h-screen overflow-x-clip border shadow-2xl border-gray-300 text-black bg-white '>
             <Frame >
               <Element is={CanvasContainer} backgroundColor='#ffffff'  canvas>
-                <Text paddingT={0} paddingR={0} paddingl={0} paddingB={0} fontFamily='Arial' textColor='linear-gradient(to top left,#acb6e5,#86fde8)' fontWeight={800} italic={false} align='start' fontSize={22} text='hello'/>
+                <Text paddingT={0} paddingR={0} paddingl={0} paddingB={0} fontFamily='Arial' textColor='linear-gradient(to top left,#acb6e5,#86fde8)' fontWeight={800} italic={true} align='start' fontSize={16} text='text'/>
               </Element>
             </Frame>
           </div>

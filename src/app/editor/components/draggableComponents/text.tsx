@@ -36,7 +36,11 @@ export const Text = ({text, fontSize, align, italic, fontWeight, textColor, font
      <div 
      ref={ref => {connect(drag(ref!))}}
      className={` flex ${align} ${italic === true && 'italic'}    `}
-     style={{ fontWeight: fontWeight, display: 'flex', justifyContent: align}}
+     style={{ fontWeight: fontWeight, display: 'flex', justifyContent: align,         whiteSpace: 'pre-wrap', // Ensures that the text wraps
+      wordWrap: 'break-word', // Ensures that long words break to the next line
+      overflow: 'hidden', // Prevents overflowing content
+      textOverflow: 'ellipsis', // Adds ellipsis (...) for overflowing text
+      }}
     >
       <ContentEditable
       key={textColor}

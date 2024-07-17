@@ -8,6 +8,7 @@ import ButtonOptions from './sideBarOptions/right/buttonOptions';
 import ImageOptions from './sideBarOptions/right/imageOptions';
 import TwoColumnsOptions from './sideBarOptions/right/twoColumnsOptions';
 import CanvasContainerOptions from './sideBarOptions/right/CanvasContainerOptions';
+import CustomisableContainerOptions from './sideBarOptions/right/customisableContainerOptions';
 
 
 export default function RightSideBar() {
@@ -42,6 +43,7 @@ export default function RightSideBar() {
           {selected.name === 'DraggableImage' && <ImageOptions selected={selected} actions={actions}/>}
           {selected.name === 'TwoColumns' && <TwoColumnsOptions selected={selected} actions={actions}/>}
           {selected.name === 'ThreeColumns' && <TwoColumnsOptions selected={selected} actions={actions}/>}
+          {selected.name === 'CustomisableContainer' && <CustomisableContainerOptions selected={selected} actions={actions}/>}
           {selected.name === 'CanvasContainer' && <CanvasContainerOptions selected={selected} actions={actions}/>}
           {selected.isDeletable && 
             <Button className=' gap-1 mt-5 w-full text-xs bg-red-800 bg-opacity-20 hover:bg-white hover:text-black text-red-500' onClick={()=>{actions.delete(selected.id)}}>

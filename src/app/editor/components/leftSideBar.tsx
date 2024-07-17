@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { useEditor } from '@craftjs/core';
+import { Element, useEditor } from '@craftjs/core';
 import React, { LegacyRef } from 'react'
 import { Text } from './draggableComponents/text';
 import { IoImageOutline, IoNewspaperOutline, IoTextOutline } from 'react-icons/io5';
@@ -7,12 +7,17 @@ import { IconType } from 'react-icons/lib';
 import { RxButton } from "react-icons/rx";
 import DraggableButton from './draggableComponents/draggableButton';
 import DraggableImage from './draggableComponents/image';
-import { TbColumns2, TbColumns3 } from "react-icons/tb";
+import { TbColumns2, TbColumns3, TbContainer } from "react-icons/tb";
 import TwoColumns from './draggableComponents/twoColumns';
 import ThreeColumns from './sideBarOptions/right/threeColumns';
-import { BsLayoutSidebarInset, BsLayoutSidebarInsetReverse, BsReverseLayoutSidebarReverse } from "react-icons/bs";
+import { BsChatLeftQuoteFill, BsLayoutSidebarInset, BsLayoutSidebarInsetReverse, BsReverseLayoutSidebarReverse } from "react-icons/bs";
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { FaHeading } from 'react-icons/fa6';
+import { FaHireAHelper } from 'react-icons/fa';
+import { CgWebsite } from 'react-icons/cg';
+import Hero from './draggableComponents/hero';
+import CustomisableContainer from './draggableComponents/customisableContainer';
+import Testimonials from './draggableComponents/testimony';
 
 
 
@@ -82,10 +87,27 @@ export default function LeftSideBar() {
                 }}>
                   <ElementOption element='Article' Icon={IoNewspaperOutline}/>
                 </div>
+                <div ref={(ref)=>{
+                  if (ref) {connectors.create(ref, <Element id='container'  marginT={0} marginB={0} marginR={0} marginl={0} height={200} width={200} paddingT={0} paddingR={0} paddingl={0} paddingB={0} alignX='center' alignY='center' flexDirection='row' backgroundColor='#ffffff' borderRadius={0} is={CustomisableContainer}  canvas/>)}
+                }}>
+                  <ElementOption element='Container' Icon={TbContainer}/>
+                </div>
           </div>
         </div>
           <div className=' mt-3'>
             <h1 className=' text-lg font-semibold mb-2'>Sections</h1>
+            <div className=' grid grid-cols-2 gap-2'>
+                <div ref={(ref)=>{
+                    if (ref) {connectors.create(ref, <Hero/>)}
+                }}>
+                  <ElementOption element='Hero' Icon={CgWebsite}/>
+                </div>
+                <div ref={(ref)=>{
+                    if (ref) {connectors.create(ref, <Testimonials/>)}
+                }}>
+                  <ElementOption element='Testimonials' Icon={BsChatLeftQuoteFill}/>
+                </div>
+            </div>
           </div>
       </div>
 

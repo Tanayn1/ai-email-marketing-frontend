@@ -36,7 +36,7 @@ export default function SideNav() {
                     Brands
                 </div>
             </a>
-            <a href="/dashboard" className=' w-full  hover:bg-zinc-700 py-2 rounded-xl'>
+            <a href="/dashboard/templates" className=' w-full  hover:bg-zinc-700 py-2 rounded-xl'>
                 <div className=' flex items-center gap-1 mx-3'>
                     <CgTemplate className=' fill-white h-5 w-5'/>
                     Templates
