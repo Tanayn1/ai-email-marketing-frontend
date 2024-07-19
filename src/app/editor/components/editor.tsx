@@ -61,7 +61,7 @@ export default function MailSparkEditor() {
         <div className="flex flex-grow">
           <LeftSideBar />
           <div className='flex justify-center items-center flex-grow'>
-            <div className='w-[700px] mt-[70px] h-[800px] overflow-x-clip border shadow-2xl border-gray-300 text-black bg-white '>
+            <div className='w-[700px] mt-[70px] min-h-screen overflow-x-clip border shadow-2xl border-gray-300 text-black bg-white '>
               <Frame json={json}>
                 <Element is={CanvasContainer} backgroundColor='#ffffff'  canvas>
                   <Text paddingT={0} paddingR={0} paddingl={0} paddingB={0} fontFamily='Arial' textColor='linear-gradient(to top left,#acb6e5,#86fde8)' fontWeight={800} italic={false} align='start' fontSize={22} text='hello'/>
@@ -80,7 +80,7 @@ export default function MailSparkEditor() {
       <div className="flex flex-grow">
         <LeftSideBar />
         <div className='flex justify-center items-center flex-grow'>
-          <div className='w-[700px] mt-[70px] h-screen overflow-x-clip border shadow-2xl border-gray-300 text-black bg-white '>
+          <div className='w-[700px] mt-[70px] min-h-screen overflow-x-clip border shadow-2xl border-gray-300 text-black bg-white '>
             <Frame >
               <Element is={CanvasContainer} backgroundColor='#ffffff'  canvas>
                 <Text paddingT={0} paddingR={0} paddingl={0} paddingB={0} fontFamily='Arial' textColor='linear-gradient(to top left,#acb6e5,#86fde8)' fontWeight={800} italic={true} align='start' fontSize={16} text='text'/>
