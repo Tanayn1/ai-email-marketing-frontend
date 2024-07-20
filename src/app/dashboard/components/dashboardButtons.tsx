@@ -4,12 +4,14 @@ import React, { useState } from 'react'
 import { HiPencilAlt } from 'react-icons/hi'
 import { RiAiGenerate } from 'react-icons/ri'
 import ManualCreationModal from './manualCreationModal'
+import { useRouter } from 'next/navigation'
 
 export default function DashboardButtons() {
     const [modalShow, setModalShow] = useState<boolean>(false)
+    const router = useRouter();
   return (
     <div className=' flex gap-7 mt-10'>
-        <div className=' transition-opacity duration-300 rounded-xl bg-gradient-to-bl from-lime-400 to-green-500 cursor-pointer hover:opacity-50  h-[150px] w-[250px] '>
+        <div onClick={()=>{router.push('/dashboard/generate-ai-email')}} className=' transition-opacity duration-300 rounded-xl bg-gradient-to-bl from-lime-400 to-green-500 cursor-pointer hover:opacity-50  h-[150px] w-[250px] '>
           <div className='flex flex-col items-center  m-10'>
             <RiAiGenerate className=' h-10 w-10'/>
             <h1 className=' text-xl font-semibold text-center'>Generate With AI</h1>
