@@ -34,12 +34,12 @@ export default function MailSparkEditor() {
     if (sessionId) {
     const data: EditorSession | null = await fetchSession(sessionId);
     if (data) {
-      setSession(data)
+      setSession(data) 
       if (data?.email_saves.length !== 0) {
         console.log(data)
         console.log(data?.email_saves[data?.email_saves.length - 1].save);
         const j = lz.decompress(lz.decodeBase64(data?.email_saves[data?.email_saves.length - 1].save));
-        setJson(j);
+        setJson(JSON.parse(j));
       }
 
     } else {
@@ -69,7 +69,7 @@ export default function MailSparkEditor() {
               </Frame>
             </div>
           </div>
-          <RightSideBar />
+          <RightSideBar product_id={session.product_id} />
         </div>
       </Editor>
     </div>
@@ -88,7 +88,7 @@ export default function MailSparkEditor() {
             </Frame>
           </div>
         </div>
-        <RightSideBar />
+        <RightSideBar product_id={session.product_id} />
       </div>
     </Editor>
   </div>

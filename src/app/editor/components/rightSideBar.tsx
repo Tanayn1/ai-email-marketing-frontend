@@ -10,8 +10,10 @@ import TwoColumnsOptions from './sideBarOptions/right/twoColumnsOptions';
 import CanvasContainerOptions from './sideBarOptions/right/CanvasContainerOptions';
 import CustomisableContainerOptions from './sideBarOptions/right/customisableContainerOptions';
 
-
-export default function RightSideBar() {
+interface RightSideBar {
+  product_id: string
+}
+export default function RightSideBar({ product_id } : RightSideBar) {
   const { actions, selected } = useEditor((state, query) => {
     const [currentNodeId] : any = state.events.selected;
     let selected;
@@ -40,7 +42,7 @@ export default function RightSideBar() {
         <div className=' mx-10 mb-10 mt-3'>
           {selected.name === 'Text' && <TextOptions selected={selected} actions={actions}/>}
           {selected.name === 'DraggableButton' && <ButtonOptions selected={selected} actions={actions}/>}
-          {selected.name === 'DraggableImage' && <ImageOptions selected={selected} actions={actions}/>}
+          {selected.name === 'DraggableImage' && <ImageOptions selected={selected} actions={actions} product_id={product_id}/>}
           {selected.name === 'TwoColumns' && <TwoColumnsOptions selected={selected} actions={actions}/>}
           {selected.name === 'ThreeColumns' && <TwoColumnsOptions selected={selected} actions={actions}/>}
           {selected.name === 'CustomisableContainer' && <CustomisableContainerOptions selected={selected} actions={actions}/>}

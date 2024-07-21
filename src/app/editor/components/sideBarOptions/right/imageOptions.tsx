@@ -1,13 +1,40 @@
+import { fetchProductById } from '@/app/dashboard/brands/actions'
 import { Options } from '@/app/editor/types/types'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import { Slider } from '@/components/ui/slider'
-import React from 'react'
+import { WithoutPrivateActions } from '@craftjs/core'
+import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
 import { CiAlignCenterH, CiAlignLeft, CiAlignRight } from 'react-icons/ci'
 
-export default function ImageOptions({ actions, selected } : Options) {
+interface ImageOptions {
+    actions: WithoutPrivateActions<null>,
+    selected: {
+        id: any;
+        name: string;
+        settings: React.ElementType<any, keyof React.JSX.IntrinsicElements>;
+        isDeletable: boolean;
+        props: Record<string, any>;
+    } | undefined
+    product_id: string
+}
+
+export default function ImageOptions({ actions, selected, product_id } : ImageOptions) {
+    const [images, setImages] = useState<Array<string>>([]);
+    const fetchImages = async ()=>{
+        const data  = await fetchProductById(product_id);
+        if (data) setImages(data.images);
+    }
+
+    useEffect(()=>{
+        fetchImages();
+    },[])
+
  if (selected) return (
     <div className=' '>
+        <ScrollArea className=' h-[500px]'>
         <div>
         <h1 className=' text-sm font-semibold mb-2'>Alignment</h1>
             <div className=' flex  gap-4'>
@@ -33,6 +60,20 @@ export default function ImageOptions({ actions, selected } : Options) {
             onChange={(e)=>{actions.setProp(selected.id, (props)=>{props.src = e.target.value})}}
             onPaste={(e)=>{actions.setProp(selected.id, (props)=>{props.src = selected.props.src + e.clipboardData })}}
             />
+            <div>
+                <h1 className=' text-xs font-medium text-zinc-200  mb-2'>Assets</h1>
+                <ScrollArea className=' h-[200px] '>
+                    <div className='grid grid-cols-2'>
+                        {images.map((image, idx)=>{
+                            return (
+                                <div className=' cursor-pointer' onClick={()=>{actions.setProp(selected.id, (props)=>{props.src = image})}}>
+                                    <Image  key={idx} alt={`image ${idx}`} src={image} height={100} width={100}/>
+                                </div>
+                        )
+                        })}
+                    </div>
+                </ScrollArea>
+            </div>
         </div>
         <div className=' mt-4'>
             <h1 className=' text-sm font-semibold mb-2'>Size</h1>
@@ -63,6 +104,7 @@ export default function ImageOptions({ actions, selected } : Options) {
                 </div>
             </div>
         </div>
+        </ScrollArea>
     </div>
   )
 }

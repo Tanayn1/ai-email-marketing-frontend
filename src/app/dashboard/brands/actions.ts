@@ -1,6 +1,7 @@
 'use server'
 
 import { cookies } from "next/headers";
+import { Product } from "../../../../types/types";
 
 export async function fetchBrands() {
     try {
@@ -124,7 +125,7 @@ export async function fetchProductById(prodId : string) {
         });
         const data = await response.json()
         if (response.ok) {
-            return data.product
+            return data.product as Product
         }
     } catch (error) {
         console.log(error)

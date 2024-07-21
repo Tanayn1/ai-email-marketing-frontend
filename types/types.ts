@@ -26,6 +26,11 @@ export interface EditorSession {
     user_id: string
     brand_id: string
     product_id: string
-    email_saves: Array<any> 
+    email_saves: Array<EmailSave> 
     created_at: string
+}
+
+export interface EmailSave {
+    save: string,
+    updated_at: string
 }
