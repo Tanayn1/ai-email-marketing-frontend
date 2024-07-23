@@ -18,6 +18,8 @@ import { CgWebsite } from 'react-icons/cg';
 import Hero from './draggableComponents/hero';
 import CustomisableContainer from './draggableComponents/customisableContainer';
 import Testimonials from './draggableComponents/testimony';
+import { AiOutlineLike } from "react-icons/ai";
+import Socials from './draggableComponents/socials';
 
 
 
@@ -25,7 +27,7 @@ export default function LeftSideBar() {
   const { connectors, query } = useEditor();
 
   return (
-    <div className=' fixed left-0 top-[70px] w-[350px] bg-zinc-900 h-screen '>
+    <div className=' fixed left-0 top-[70px] w-[350px] bg-zinc-900 h-screen z-10 '>
       <ScrollArea className=' h-[600px]'>
       <div className=' m-4 '>
         <h1 className=' text-lg font-semibold mb-2'>Elements</h1>
@@ -106,6 +108,12 @@ export default function LeftSideBar() {
                     if (ref) {connectors.create(ref, <Testimonials/>)}
                 }}>
                   <ElementOption element='Testimonials' Icon={BsChatLeftQuoteFill}/>
+                </div>
+                <div ref={(ref)=>{
+                    if (ref) {connectors.create(ref, <Socials link1='instagram.com' link2='facebook.com' link3='tiktok.com'  marginT={0} marginB={0} marginR={0} marginl={0} flex='row' align='center' fontFamily='Arial' textColor='#000000' italic={false} fontWeight={400} 
+                        fontSize={10} src1='' src2='' src3='' src1Text='Instagram' src2Text='Facebook' src3Text='Tiktok'/>)}
+                }}> 
+                  <ElementOption element='Socials' Icon={AiOutlineLike}/>
                 </div>
             </div>
           </div>

@@ -22,6 +22,7 @@ import Hero from './draggableComponents/hero';
 import CustomisableContainer from './draggableComponents/customisableContainer';
 import Testimonials from './draggableComponents/testimony';
 import { MdOutlineStarPurple500 } from 'react-icons/md';
+import Socials from './draggableComponents/socials';
 
 export default function MailSparkEditor() {
   const [session, setSession] = useState<null | EditorSession>(null);
@@ -56,7 +57,7 @@ export default function MailSparkEditor() {
  if (sessionId && session && json  ) {
   return (
     <div className="flex flex-col h-screen ">
-      <Editor  resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer, Hero, CustomisableContainer, Testimonials, MdOutlineStarPurple500 }}>
+      <Editor  resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer, Hero, CustomisableContainer, Testimonials, MdOutlineStarPurple500, Socials }}>
         <Navbar  session={session} />
         <div className="flex flex-grow">
           <LeftSideBar />
@@ -75,7 +76,7 @@ export default function MailSparkEditor() {
     </div>
   )} else if (sessionId && session) {
     <div className="flex flex-col h-screen ">
-    <Editor  resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer, Hero, CustomisableContainer, Testimonials, MdOutlineStarPurple500 }}>
+    <Editor  resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer, Hero, CustomisableContainer, Testimonials, MdOutlineStarPurple500, Socials }}>
       <Navbar  session={session} />
       <div className="flex flex-grow">
         <LeftSideBar />

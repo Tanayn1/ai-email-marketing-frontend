@@ -1,4 +1,5 @@
 import { fetchProductById } from '@/app/dashboard/brands/actions'
+import { addFileToAssets } from '@/app/editor/actions'
 import { Options } from '@/app/editor/types/types'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -8,6 +9,7 @@ import { WithoutPrivateActions } from '@craftjs/core'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { CiAlignCenterH, CiAlignLeft, CiAlignRight } from 'react-icons/ci'
+import { toast } from 'sonner'
 
 interface ImageOptions {
     actions: WithoutPrivateActions<null>,
@@ -26,6 +28,22 @@ export default function ImageOptions({ actions, selected, product_id } : ImageOp
     const fetchImages = async ()=>{
         const data  = await fetchProductById(product_id);
         if (data) setImages(data.images);
+    }
+
+    const handleUploadImage = async (e: React.ChangeEvent<HTMLInputElement>)=>{
+        const formData = new FormData
+        if (e.target.files) {
+            formData.append('file', e.target.files[0]);
+            const response = await addFileToAssets(formData, product_id)
+            if (response?.url && response.product) {
+                setImages(response.product.images)
+                actions.setProp(selected?.id, (props)=>{props.src = response.url})
+            } else if (response?.error) {
+                toast.error(response.error)
+            } else {
+                toast.error('Internal Server Error')
+            }
+        }
     }
 
     useEffect(()=>{
@@ -54,7 +72,7 @@ export default function ImageOptions({ actions, selected, product_id } : ImageOp
         </div>
         <div className=' mt-4'>
             <h1 className=' text-sm font-semibold mb-2'>Image Source</h1>
-            <Input onChange={()=>{}} className=' file:text-zinc-400 file:text-xs bg-zinc-900 text-white placeholder:text-white text-xs' type='file'/>
+            <Input onChange={(e)=>{handleUploadImage(e)}} className=' file:text-zinc-400 file:text-xs bg-zinc-900 text-white placeholder:text-white text-xs' type='file'/>
             
             <Input disabled value={selected.props.src} className=' bg-zinc-900 my-3' 
             onChange={(e)=>{actions.setProp(selected.id, (props)=>{props.src = e.target.value})}}

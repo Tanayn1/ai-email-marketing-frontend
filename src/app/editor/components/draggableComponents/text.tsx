@@ -52,7 +52,7 @@ export const Text = ({text, fontSize, align, italic, fontWeight, textColor, font
           )
         } 
         tagName="p"
-        className={``}
+        className={` `}
         style={{fontSize: `${fontSize}px`, background: textColor, WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent', fontFamily: fontFamily, 
         paddingTop: `${paddingT}px`,
@@ -63,8 +63,8 @@ export const Text = ({text, fontSize, align, italic, fontWeight, textColor, font
         wordWrap: 'break-word', // Ensures that long words break to the next line
         overflow: 'hidden', // Prevents overflowing content
         textOverflow: 'ellipsis', // Adds ellipsis (...) for overflowing text
-        maxWidth: '100%' // Ensures the element does not exceed the container width
-        
+        maxWidth: '100%', // Ensures the element does not exceed the container width
+        textAlign: align
       }}
       />
     </div>
