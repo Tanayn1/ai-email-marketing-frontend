@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import { EditorSession } from '../../../../types/types';
 import { useRouter } from 'next/navigation';
 import { Loader2Icon } from 'lucide-react';
+import { craftJsonToHtml } from '../lib/codeGen';
 
 interface Navbar {
   session : EditorSession,
@@ -41,6 +42,12 @@ export default function Navbar({ session} : Navbar) {
 
   },[])
 
+  const exportHTML = ()=>{
+    const json = query.serialize()
+    const html = craftJsonToHtml(json)
+    console.log(html)
+  }
+
   return (
     <div className='flex items-center justify-between w-full fixed top-0 bg-zinc-900 h-[70px] z-10'>
         <div className=' flex items-center gap-1 text-lg font-semibold m-4'>
@@ -55,7 +62,7 @@ export default function Navbar({ session} : Navbar) {
           <Button disabled={saveLoading} className=' text-xs h-[25px] px-7' onClick={()=>{handleSave()}}>
             {saveLoading ? <Loader2Icon className=' animate-spin'/> : 'Save'}
           </Button>
-          <Button onClick={()=>{console.log(query.serialize())}}>Temporary ting</Button>
+          <Button onClick={()=>{exportHTML()}}>Temporary ting</Button>
         </div>
     </div>
   )

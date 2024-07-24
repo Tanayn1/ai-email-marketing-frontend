@@ -23,6 +23,8 @@ import CustomisableContainer from './draggableComponents/customisableContainer';
 import Testimonials from './draggableComponents/testimony';
 import { MdOutlineStarPurple500 } from 'react-icons/md';
 import Socials from './draggableComponents/socials';
+import BackgroundImage from './draggableComponents/backgroundImage';
+import Image from 'next/image';
 
 export default function MailSparkEditor() {
   const [session, setSession] = useState<null | EditorSession>(null);
@@ -57,13 +59,13 @@ export default function MailSparkEditor() {
  if (sessionId && session && json  ) {
   return (
     <div className="flex flex-col h-screen ">
-      <Editor  resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer, Hero, CustomisableContainer, Testimonials, MdOutlineStarPurple500, Socials }}>
+      <Editor  resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer, Hero, CustomisableContainer, Testimonials, MdOutlineStarPurple500, Socials, BackgroundImage, Image }}>
         <Navbar  session={session} />
         <div className="flex flex-grow">
           <LeftSideBar />
           <div className='flex justify-center items-center flex-grow'>
             <div className='w-[700px] mt-[70px] min-h-screen overflow-x-clip border shadow-2xl border-gray-300 text-black bg-white '>
-              <Frame json={json}>
+              <Frame data={json}>
                 <Element is={CanvasContainer} backgroundColor='#ffffff'  canvas>
                   <Text paddingT={0} paddingR={0} paddingl={0} paddingB={0} fontFamily='Arial' textColor='linear-gradient(to top left,#acb6e5,#86fde8)' fontWeight={800} italic={false} align='start' fontSize={22} text='hello'/>
                 </Element>
@@ -76,7 +78,7 @@ export default function MailSparkEditor() {
     </div>
   )} else if (sessionId && session) {
     <div className="flex flex-col h-screen ">
-    <Editor  resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer, Hero, CustomisableContainer, Testimonials, MdOutlineStarPurple500, Socials }}>
+    <Editor  resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer, Hero, CustomisableContainer, Testimonials, MdOutlineStarPurple500, Socials, BackgroundImage, Image }}>
       <Navbar  session={session} />
       <div className="flex flex-grow">
         <LeftSideBar />

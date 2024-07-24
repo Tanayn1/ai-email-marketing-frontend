@@ -10,6 +10,7 @@ import TwoColumnsOptions from './sideBarOptions/right/twoColumnsOptions';
 import CanvasContainerOptions from './sideBarOptions/right/CanvasContainerOptions';
 import CustomisableContainerOptions from './sideBarOptions/right/customisableContainerOptions';
 import SocialOptions from './sideBarOptions/right/socialOptions';
+import BackgroundImageOptions from './sideBarOptions/right/backgroundImageOptions';
 
 interface RightSideBar {
   product_id: string
@@ -49,6 +50,7 @@ export default function RightSideBar({ product_id } : RightSideBar) {
           {selected.name === 'CustomisableContainer' && <CustomisableContainerOptions selected={selected} actions={actions}/>}
           {selected.name === 'CanvasContainer' && <CanvasContainerOptions selected={selected} actions={actions}/>}
           {selected.name === 'Socials' && <SocialOptions selected={selected} actions={actions}/>}
+          {selected.name === 'BackgroundImage' && <BackgroundImageOptions selected={selected} actions={actions}/>}
 
           {selected.isDeletable && 
             <Button className=' gap-1 mt-5 w-full text-xs bg-red-800 bg-opacity-20 hover:bg-white hover:text-black text-red-500' onClick={()=>{actions.delete(selected.id)}}>

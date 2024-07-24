@@ -7,7 +7,7 @@ import { IconType } from 'react-icons/lib';
 import { RxButton } from "react-icons/rx";
 import DraggableButton from './draggableComponents/draggableButton';
 import DraggableImage from './draggableComponents/image';
-import { TbColumns2, TbColumns3, TbContainer } from "react-icons/tb";
+import { TbBackground, TbColumns2, TbColumns3, TbContainer } from "react-icons/tb";
 import TwoColumns from './draggableComponents/twoColumns';
 import ThreeColumns from './sideBarOptions/right/threeColumns';
 import { BsChatLeftQuoteFill, BsLayoutSidebarInset, BsLayoutSidebarInsetReverse, BsReverseLayoutSidebarReverse } from "react-icons/bs";
@@ -20,6 +20,7 @@ import CustomisableContainer from './draggableComponents/customisableContainer';
 import Testimonials from './draggableComponents/testimony';
 import { AiOutlineLike } from "react-icons/ai";
 import Socials from './draggableComponents/socials';
+import BackgroundImage from './draggableComponents/backgroundImage';
 
 
 
@@ -107,13 +108,19 @@ export default function LeftSideBar() {
                 <div ref={(ref)=>{
                     if (ref) {connectors.create(ref, <Testimonials/>)}
                 }}>
-                  <ElementOption element='Testimonials' Icon={BsChatLeftQuoteFill}/>
+                  <ElementOption element='Testimonial' Icon={BsChatLeftQuoteFill}/>
                 </div>
                 <div ref={(ref)=>{
                     if (ref) {connectors.create(ref, <Socials link1='instagram.com' link2='facebook.com' link3='tiktok.com'  marginT={0} marginB={0} marginR={0} marginl={0} flex='row' align='center' fontFamily='Arial' textColor='#000000' italic={false} fontWeight={400} 
                         fontSize={10} src1='' src2='' src3='' src1Text='Instagram' src2Text='Facebook' src3Text='Tiktok'/>)}
                 }}> 
                   <ElementOption element='Socials' Icon={AiOutlineLike}/>
+                </div>
+                <div ref={(ref)=>{
+                    if (ref) {connectors.create(ref, <BackgroundImage marginT={0} marginB={0} marginR={0} marginl={0} 
+                      height={700} src='https://easy-email-m-ryan.vercel.app/images/acbae5eb-efa4-4eb6-866c-f421e740b713-ad3c92b1-9cdb-4a7b-aad3-75ad809db8a3.png'/>)}
+                }}>
+                  <ElementOption element='Image Background' Icon={TbBackground}/>
                 </div>
             </div>
           </div>

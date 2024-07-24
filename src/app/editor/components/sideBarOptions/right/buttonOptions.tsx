@@ -15,7 +15,7 @@ import { Options } from '@/app/editor/types/types'
 
 export default function ButtonOptions({ actions, selected } : Options) {
 if (selected) return (
-  <ScrollArea className=' h-[600px] '>
+  <ScrollArea className=' h-[500px] '>
     <div className=''>
       <div className=' mb-4'>
         <h1 className=' text-sm font-semibold mb-2'> Content</h1>

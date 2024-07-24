@@ -5,23 +5,31 @@ import { fetchBrandById } from '../actions';
 import { ShoppingCart } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Products from './products';
+import Logos from './logos';
+import FontsColors from './fontsColors';
+import { Brand as B  } from '../../../../../types/types';
 
 export default function Brand() {
     const [brandName, setBrandName] = useState<null | string>(null)
+    const [brand, setBrand] = useState<null | B>(null)
 
     const searchParams = useSearchParams()
     const brandId = searchParams.get('id');
     const fetchData = async ()=>{
       if (brandId) {
         const response = await fetchBrandById(brandId);
-        setBrandName(response.brand_name)
+        if (response) {
+          setBrandName(response.brand_name);
+          setBrand(response);
+
+        } 
         
       }
     }
     useEffect(()=>{
       fetchData()
     },[])
- if (brandId) {return (
+ if (brandId && brand) {return (
     <div className=' '>
       <div className=''>
         <div className=' bg-zinc-800 border border-zinc-700 shadow-2xl ml-5 h-[600px] mr-20 rounded-xl'>
@@ -37,10 +45,10 @@ export default function Brand() {
               <Products brandId={brandId}/>
             </TabsContent>
             <TabsContent value='logos'>
-              <div>sdfs</div>
+              <Logos/>
             </TabsContent>
             <TabsContent value='fonts & colors'>
-              <div>fds</div>
+              <FontsColors brand={brand}/>
             </TabsContent>
             </Tabs>
           </div>

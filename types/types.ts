@@ -4,8 +4,8 @@ export interface Brand {
     brand_name: string
     brand_url: string | null,
     logo: string | null,
-    colors: any,
-    fonts: any,
+    colors: Colors,
+    fonts: Fonts,
     created_at: string
 }
 
@@ -33,4 +33,20 @@ export interface EditorSession {
 export interface EmailSave {
     save: string,
     updated_at: string
+}
+
+export interface Fonts {
+    primaryFont: string, 
+    secondaryFont: string
+}
+
+export interface Colors {
+    colors: {
+        primaryColor: string,
+        secondaryColors: Array<any>
+    },
+    backgroundColors: {        
+        primaryColor: string,
+        secondaryColors: Array<any>
+    }
 }
