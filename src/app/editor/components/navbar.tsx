@@ -62,6 +62,7 @@ export default function Navbar({ session} : Navbar) {
           <Button disabled={saveLoading} className=' text-xs h-[25px] px-7' onClick={()=>{handleSave()}}>
             {saveLoading ? <Loader2Icon className=' animate-spin'/> : 'Save'}
           </Button>
+          <Button></Button>
           <Button onClick={()=>{exportHTML()}}>Temporary ting</Button>
         </div>
     </div>

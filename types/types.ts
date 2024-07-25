@@ -50,3 +50,9 @@ export interface Colors {
         secondaryColors: Array<any>
     }
 }
+
+export interface ESPKey {
+    label: string,
+    created_at: string,
+    id: string
+}

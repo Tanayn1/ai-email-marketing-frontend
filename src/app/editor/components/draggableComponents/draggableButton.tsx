@@ -17,12 +17,13 @@ interface DraggableButton {
     marginl: number,
     marginR: number,
     align: 'center' | 'start' | 'end',
-    link: string | undefined
+    link: string | undefined,
+    fontFamily: string
 }
 
 export default function DraggableButton({ text, backgroundColor, textColor, 
   paddingT, paddingB, paddingR, paddingl, fontWeight, fontSize, borderRadius, 
-  marginT, marginB, marginl, marginR, align, link } : DraggableButton) {
+  marginT, marginB, marginl, marginR, align, link, fontFamily } : DraggableButton) {
     const { connectors: {connect, drag}, hasSelectedNode, hasDraggedNode , actions: {setProp} } = useNode((state)=>({
         hasSelectedNode: state.events.selected,
         hasDraggedNode: state.events.dragged,
@@ -45,6 +46,7 @@ export default function DraggableButton({ text, backgroundColor, textColor,
         marginBottom: `${marginB}px`,
         marginRight: `${marginR}px`,
         marginLeft: `${marginl}px`,
+        fontFamily: fontFamily,
         outline: hasSelectedNode ? '2px solid black' : 'none'}}>{text}</a>
     </div>
   )

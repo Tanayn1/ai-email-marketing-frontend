@@ -32,6 +32,10 @@ if (selected) return (
               <FontWeightDropdown actions={actions} selected={selected}/> 
             </div>
         </div>
+        <div className=' mt-3'>
+            <h1 className=' text-xs font-medium text-zinc-200 mb-2'>Font Family</h1>
+            <FontsDropdown handleFontChange={(font: string)=>{actions.setProp(selected.id,(props)=>{props.fontFamily = font})}} selectedFont={selected.props.fontFamily}/>
+        </div>
       </div>
         <h1 className=' text-sm font-semibold mb-2'>Colors</h1>
         <div className=' flex items-center gap-6'>

@@ -46,7 +46,7 @@ export default function LeftSideBar() {
               <div ref={(ref)=>{if (ref) {connectors.create(ref, <DraggableButton
               fontSize={20} fontWeight={500} borderRadius={10} align='center'
               marginT={0} marginB={0} marginR={0} marginl={0} link={undefined}
-              paddingT={10} paddingR={10} paddingl={10} paddingB={10}  
+              paddingT={10} paddingR={10} paddingl={10} paddingB={10} fontFamily='Arial'  
               backgroundColor='#00000' textColor='#00000' text='Click Me'/>)}}}>
                 <ElementOption element='Button' Icon={RxButton}/>
               </div>

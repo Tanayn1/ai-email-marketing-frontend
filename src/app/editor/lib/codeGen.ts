@@ -1,14 +1,14 @@
-export function craftJsonToHtml(jsonString) {
+export function craftJsonToHtml(jsonString : string) {
     const nodes = JSON.parse(jsonString);
   
-    function generateHtml(nodeId) {
+    function generateHtml(nodeId : string) {
       const node = nodes[nodeId];
       if (!node) return '';
   
       let html = '';
       const { type, props, nodes: childNodes, linkedNodes } = node;
   
-      function generateStyles(props) {
+      function generateStyles(props : any) {
         let styleString = '';
         for (const [key, value] of Object.entries(props)) {
           if (typeof value === 'object' || key === 'text') continue;
@@ -26,10 +26,10 @@ export function craftJsonToHtml(jsonString) {
             case 'fontFamily': styleString += `font-family: ${value}; `; break;
             case 'fontSize': styleString += `font-size: ${value}px; `; break;
             case 'fontWeight': styleString += `font-weight: ${value}; `; break;
-            case 'align': 
-              styleString += `text-align: ${value}; `;
-              if (type.resolvedName === 'DraggableButton' || type.resolvedName === 'DraggableImage') {
-                styleString += `display: flex; justify-content: ${value}; `;
+            case 'align':
+              styleString += `display: flex; justify-content: ${value}; `; 
+              if (type.resolvedName === 'Text') {
+                styleString += `text-align: ${value}; `;
               }
               break;
             case 'width': styleString += `width: ${value}px; `; break;
@@ -61,8 +61,9 @@ export function craftJsonToHtml(jsonString) {
             html += `<img src="${props.src}" width="${props.width}" height="${props.height}" ${attributes} alt=""/>`;
             html += `</div>`;
           } else {
-            html += `<div${attributes}>Image placeholder</div>`;
-          }
+            html += `<div style="display: flex; justify-content: ${props.align};">`;
+            html += `<img src="${props.src}" width="${props.width}" height="${props.height}" ${attributes} alt=""/>`;
+            html += `</div>`; }
           break;
         case 'DraggableButton':
           html += `<div style="display: flex; justify-content: ${props.align};">`;
@@ -70,25 +71,43 @@ export function craftJsonToHtml(jsonString) {
           html += `</div>`;
           break;
         case 'CustomisableContainer':
+          html += `<div style="display: flex; ${style}">`;
+          (childNodes || []).forEach((childId : any) => {
+            html += generateHtml(childId);
+          });
+          Object.values(linkedNodes || {}).forEach((linkedNodeId : any) => {
+            html += generateHtml(linkedNodeId);
+          });
+          html += '</div>';
+          break;
         case 'CanvasContainer':
         case 'Hero':
         case 'Testimonials':
-        case 'div':
-          html += `<div${attributes}>`;
-          (childNodes || []).forEach(childId => {
+          html += `<div style="display: flex; justify-content: center; ${style}">`;
+          (childNodes || []).forEach((childId : any) => {
             html += generateHtml(childId);
           });
-          Object.values(linkedNodes || {}).forEach(linkedNodeId => {
+          Object.values(linkedNodes || {}).forEach((linkedNodeId : any) => {
+            html += generateHtml(linkedNodeId);
+          });
+          html += '</div>';
+          break;
+        case 'div':
+          html += `<div${attributes}>`;
+          (childNodes || []).forEach((childId : any) => {
+            html += generateHtml(childId);
+          });
+          Object.values(linkedNodes || {}).forEach((linkedNodeId : any) => {
             html += generateHtml(linkedNodeId);
           });
           html += '</div>';
           break;
         default:
           html += `<div${attributes}>`;
-          (childNodes || []).forEach(childId => {
+          (childNodes || []).forEach((childId : any) => {
             html += generateHtml(childId);
           });
-          Object.values(linkedNodes || {}).forEach(linkedNodeId => {
+          Object.values(linkedNodes || {}).forEach((linkedNodeId : any) => {
             html += generateHtml(linkedNodeId);
           });
           html += '</div>';
@@ -98,7 +117,7 @@ export function craftJsonToHtml(jsonString) {
     }
   
     const rootNodeId = Object.keys(nodes).find(id => !nodes[id].parent);
-    const bodyContent = generateHtml(rootNodeId);
+    const bodyContent = generateHtml(rootNodeId!);
   
     return `
   <!DOCTYPE html>
