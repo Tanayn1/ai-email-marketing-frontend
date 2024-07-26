@@ -93,3 +93,28 @@ export async function addFileToAssets(formData: FormData, product_id: string) {
         console.log(error)
     }
 }
+
+
+export async function getImage(html: string) {
+    try {
+        const token = cookies().get('Token')?.value;
+        const response = await fetch(`${process.env.BACKEND_URL}/editor/htmlToImage`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                html: html
+            })
+        });
+        if (response.ok) {
+            const arrayBuffer = await response.arrayBuffer();
+            // Convert ArrayBuffer to Base64
+            const base64 = Buffer.from(arrayBuffer).toString('base64');
+            return base64;
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}

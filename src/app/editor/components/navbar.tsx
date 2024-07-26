@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useEditor } from "@craftjs/core";
 import { Button } from '@/components/ui/button';
 import lz from "lzutf8";
-import { fetchSession, saveEmail } from '../actions';
+import { fetchSession, getImage, saveEmail } from '../actions';
 import { toast } from 'sonner';
 import { EditorSession } from '../../../../types/types';
 import { useRouter } from 'next/navigation';
@@ -16,13 +16,41 @@ interface Navbar {
 }
 
 export default function Navbar({ session} : Navbar) {
-  const [saveLoading, setSaveLoading] = useState<boolean>(false)
+  const [saveLoading, setSaveLoading] = useState<boolean>(false);
+  const [imageCaptureLoading, setImageCaptureLoading] = useState<boolean>(false)
   const { actions, query, enabled } = useEditor((state)=>({
     enabled: state.options.enabled
   }))
 
 
-  
+  const captureImage = async ()=>{
+    setImageCaptureLoading(true)
+    const json = query.serialize()
+    const html = craftJsonToHtml(json)
+    const base64Image = await getImage(html);
+    if (base64Image) {
+      // Convert Base64 to Blob
+      const byteCharacters = atob(base64Image);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], {type: 'image/png'});
+
+      // Create download link
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = 'generated-image.png';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      setImageCaptureLoading(false)
+  }          
+
+  }
 
   const handleSave = async ()=>{
     setSaveLoading(true)
@@ -62,7 +90,7 @@ export default function Navbar({ session} : Navbar) {
           <Button disabled={saveLoading} className=' text-xs h-[25px] px-7' onClick={()=>{handleSave()}}>
             {saveLoading ? <Loader2Icon className=' animate-spin'/> : 'Save'}
           </Button>
-          <Button></Button>
+          <Button onClick={()=>{captureImage()}}>Image</Button>
           <Button onClick={()=>{exportHTML()}}>Temporary ting</Button>
         </div>
     </div>
