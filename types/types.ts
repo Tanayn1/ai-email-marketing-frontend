@@ -26,7 +26,8 @@ export interface EditorSession {
     user_id: string
     brand_id: string
     product_id: string
-    email_saves: Array<EmailSave> 
+    email_saves: Array<EmailSave>
+    preview_image_src: string 
     created_at: string
 }
 

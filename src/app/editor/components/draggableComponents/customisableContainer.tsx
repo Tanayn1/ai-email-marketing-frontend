@@ -52,7 +52,7 @@ export default function CustomisableContainer({ children, backgroundColor, width
         wordWrap: 'break-word', // Break long words
         whiteSpace: 'normal',  // Ensure text wraps normally
         textOverflow: 'ellipsis',
-        contain: 'strict' // Optionally handle text overflow with ellipsis
+        contain: 'strict', // Optionally handle text overflow with ellipsis
         }}>
         {children}
     </div>

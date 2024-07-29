@@ -25,6 +25,7 @@ import { MdOutlineStarPurple500 } from 'react-icons/md';
 import Socials from './draggableComponents/socials';
 import BackgroundImage from './draggableComponents/backgroundImage';
 import Image from 'next/image';
+import ShopProducts from './draggableComponents/shopProducts';
 
 export default function MailSparkEditor() {
   const [session, setSession] = useState<null | EditorSession>(null);
@@ -56,19 +57,17 @@ export default function MailSparkEditor() {
   useEffect(()=>{
     fetchData();
   },[])
- if (sessionId && session && json  ) {
+ if (sessionId && session   ) {
   return (
     <div className="flex flex-col h-screen ">
-      <Editor  resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer, Hero, CustomisableContainer, Testimonials, MdOutlineStarPurple500, Socials, BackgroundImage, Image }}>
+      <Editor  resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer, Hero, CustomisableContainer, Testimonials, MdOutlineStarPurple500, Socials, BackgroundImage, Image, ShopProducts }}>
         <Navbar  session={session} />
         <div className="flex flex-grow">
           <LeftSideBar />
           <div className='flex justify-center items-center flex-grow'>
             <div className='w-[700px] mt-[70px] min-h-screen overflow-x-clip border shadow-2xl border-gray-300 text-black bg-white '>
-              <Frame data={json}>
-                <Element is={CanvasContainer} backgroundColor='#ffffff'  canvas>
-                  <Text paddingT={0} paddingR={0} paddingl={0} paddingB={0} fontFamily='Arial' textColor='linear-gradient(to top left,#acb6e5,#86fde8)' fontWeight={800} italic={false} align='start' fontSize={22} text='hello'/>
-                </Element>
+              <Frame data={json} >
+                <Element is={CanvasContainer} backgroundColor='#ffffff'  canvas/>
               </Frame>
             </div>
           </div>
@@ -76,7 +75,7 @@ export default function MailSparkEditor() {
         </div>
       </Editor>
     </div>
-  )} else if (sessionId && session) {
+  )} /*else if (sessionId && session) {
     <div className="flex flex-col h-screen ">
     <Editor  resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer, Hero, CustomisableContainer, Testimonials, MdOutlineStarPurple500, Socials, BackgroundImage, Image }}>
       <Navbar  session={session} />
@@ -101,6 +100,6 @@ export default function MailSparkEditor() {
       <Loader2 className=' h-28 w-28 animate-spin'/>
     </div>
     )
-  }
+  }*/
 }
 

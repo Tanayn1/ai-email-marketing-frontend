@@ -40,18 +40,16 @@ export const Text = ({text, fontSize, align, italic, fontWeight, textColor, font
       wordWrap: 'break-word', // Ensures that long words break to the next line
       overflow: 'hidden', // Prevents overflowing content
       textOverflow: 'ellipsis', // Adds ellipsis (...) for overflowing text
+
+      outline: hasSelectedNode ? '2px solid black' : 'none'
       }}
     >
-      <ContentEditable
+      <p
       key={textColor}
-      disabled={!editable}
-        html={text} 
-        onChange={e => 
-          setProp((props : any) => 
-            props.text = e.target.value.replace(/<\/?[^>]+(>|$)/g, "")  
-          )
-        } 
-        tagName="p"
+      //disabled={!editable}
+        //html={text} 
+
+        //tagName="p"
         className={` `}
         style={{fontSize: `${fontSize}px`, background: textColor, WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent', fontFamily: fontFamily, 
@@ -66,7 +64,7 @@ export const Text = ({text, fontSize, align, italic, fontWeight, textColor, font
         maxWidth: '100%', // Ensures the element does not exceed the container width
         textAlign: align
       }}
-      />
+      >{text}</p>
     </div>
   )
 }

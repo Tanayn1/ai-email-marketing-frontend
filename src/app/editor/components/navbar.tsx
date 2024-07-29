@@ -57,7 +57,8 @@ export default function Navbar({ session} : Navbar) {
     actions.selectNode(null!)
     const json = query.serialize()
     const encodedJson = lz.encodeBase64(lz.compress(json));
-    const updatedEmail = await saveEmail(encodedJson, session!)
+    const html = craftJsonToHtml(json)
+    const updatedEmail = await saveEmail(encodedJson, session!, html)
     if (updatedEmail) {
       toast.success('Email Saved')  
       setSaveLoading(false)

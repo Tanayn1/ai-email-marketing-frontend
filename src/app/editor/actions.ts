@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { EditorSession, Product } from "../../../types/types";
 
-export async function saveEmail(json : string, session: EditorSession) {
+export async function saveEmail(json : string, session: EditorSession, html: string) {
     try {
         const date = new Date()
         const token = cookies().get('Token')?.value;
@@ -19,7 +19,8 @@ export async function saveEmail(json : string, session: EditorSession) {
                 json_array: [...session.email_saves, {
                     updated_at: `${date.toLocaleTimeString()}, ${date.toLocaleDateString()}`,
                     save: json
-                }]
+                }],
+                html: html,
             })
         });
 

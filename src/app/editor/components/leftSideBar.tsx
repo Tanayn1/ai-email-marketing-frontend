@@ -21,6 +21,10 @@ import Testimonials from './draggableComponents/testimony';
 import { AiOutlineLike } from "react-icons/ai";
 import Socials from './draggableComponents/socials';
 import BackgroundImage from './draggableComponents/backgroundImage';
+import { RiShoppingBag2Fill } from 'react-icons/ri';
+import ShopProducts from './draggableComponents/shopProducts';
+import { BiSolidDockBottom } from "react-icons/bi";
+
 
 
 
@@ -56,7 +60,6 @@ export default function LeftSideBar() {
                 >
                   <ElementOption element='Image' Icon={IoImageOutline}/>
                 </div>
-
         </div>
         <div className=' mt-3'>
           <h1 className=' text-lg font-semibold mb-2'>Layouts</h1>
@@ -121,6 +124,14 @@ export default function LeftSideBar() {
                       height={700} src='https://easy-email-m-ryan.vercel.app/images/acbae5eb-efa4-4eb6-866c-f421e740b713-ad3c92b1-9cdb-4a7b-aad3-75ad809db8a3.png'/>)}
                 }}>
                   <ElementOption element='Image Background' Icon={TbBackground}/>
+                </div>
+                <div ref={(ref)=>{
+                    if (ref) {connectors.create(ref, <ShopProducts/>)}
+                }}>
+                  <ElementOption element='Shop Products' Icon={RiShoppingBag2Fill}/>
+                </div>
+                <div>
+                  <ElementOption element='Footer' Icon={BiSolidDockBottom}/>
                 </div>
             </div>
           </div>

@@ -81,6 +81,15 @@ export function craftJsonToHtml(jsonString : string) {
           html += '</div>';
           break;
         case 'CanvasContainer':
+          html += `<div ${attributes}">`;
+          (childNodes || []).forEach((childId : any) => {
+            html += generateHtml(childId);
+          });
+          Object.values(linkedNodes || {}).forEach((linkedNodeId : any) => {
+            html += generateHtml(linkedNodeId);
+          });
+          html += '</div>';
+          break;        
         case 'Hero':
         case 'Testimonials':
           html += `<div style="display: flex; justify-content: center; ${style}">`;

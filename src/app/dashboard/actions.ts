@@ -79,6 +79,7 @@ export async function fetchEditSessions() {
             }
         });
         const data = await response.json();
+        console.log(data)
         if (response.ok) {
             return data.sessions
         }
