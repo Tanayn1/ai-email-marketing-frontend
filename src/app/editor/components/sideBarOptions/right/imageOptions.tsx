@@ -25,6 +25,7 @@ interface ImageOptions {
 
 export default function ImageOptions({ actions, selected, product_id } : ImageOptions) {
     const [images, setImages] = useState<Array<string>>([]);
+    const [logos, setLogos] = useState<string[]>([]);
     const fetchImages = async ()=>{
         const data  = await fetchProductById(product_id);
         if (data) setImages(data.images);
@@ -78,6 +79,20 @@ export default function ImageOptions({ actions, selected, product_id } : ImageOp
             onChange={(e)=>{actions.setProp(selected.id, (props)=>{props.src = e.target.value})}}
             onPaste={(e)=>{actions.setProp(selected.id, (props)=>{props.src = selected.props.src + e.clipboardData })}}
             />
+            <div>
+                <h1 className=' text-xs font-medium text-zinc-200  mb-2'>Logos</h1>
+                <ScrollArea className=' h-[200px] '>
+                    <div className='grid grid-cols-2'>
+                        {logos.map((logo, idx)=>{
+                            return (
+                                <div className=' cursor-pointer' onClick={()=>{actions.setProp(selected.id, (props)=>{props.src = logo})}}>
+                                    <Image  key={idx} alt={`image ${idx}`} src={logo} height={100} width={100}/>
+                                </div>
+                        )
+                        })}
+                    </div>
+                </ScrollArea>
+            </div>
             <div>
                 <h1 className=' text-xs font-medium text-zinc-200  mb-2'>Assets</h1>
                 <ScrollArea className=' h-[200px] '>

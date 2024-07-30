@@ -24,6 +24,12 @@ import BackgroundImage from './draggableComponents/backgroundImage';
 import { RiShoppingBag2Fill } from 'react-icons/ri';
 import ShopProducts from './draggableComponents/shopProducts';
 import { BiSolidDockBottom } from "react-icons/bi";
+import DraggableFooter from './draggableComponents/draggableFooter';
+import DraggableSocials from './draggableComponents/draggableSocials';
+import {DefaultLayer, DefaultLayerHeader, Layers, useLayer} from "@craftjs/layers"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { LayerHeader } from './layers';
+import { Layer } from '../layers/defaultLayer';
 
 
 
@@ -33,6 +39,12 @@ export default function LeftSideBar() {
 
   return (
     <div className=' fixed left-0 top-[70px] w-[350px] bg-zinc-900 h-screen z-10 '>
+      <Tabs>
+      <TabsList defaultValue={'elements'}  className=' m-4 bg-zinc-800   ' >
+        <TabsTrigger value="elements">Elements</TabsTrigger>
+        <TabsTrigger value="layers">Layers</TabsTrigger>
+      </TabsList>
+      <TabsContent value="elements">
       <ScrollArea className=' h-[600px]'>
       <div className=' m-4 '>
         <h1 className=' text-lg font-semibold mb-2'>Elements</h1>
@@ -114,8 +126,7 @@ export default function LeftSideBar() {
                   <ElementOption element='Testimonial' Icon={BsChatLeftQuoteFill}/>
                 </div>
                 <div ref={(ref)=>{
-                    if (ref) {connectors.create(ref, <Socials link1='instagram.com' link2='facebook.com' link3='tiktok.com'  marginT={0} marginB={0} marginR={0} marginl={0} flex='row' align='center' fontFamily='Arial' textColor='#000000' italic={false} fontWeight={400} 
-                        fontSize={10} src1='' src2='' src3='' src1Text='Instagram' src2Text='Facebook' src3Text='Tiktok'/>)}
+                    if (ref) {connectors.create(ref, <DraggableSocials/>)}
                 }}> 
                   <ElementOption element='Socials' Icon={AiOutlineLike}/>
                 </div>
@@ -130,14 +141,22 @@ export default function LeftSideBar() {
                 }}>
                   <ElementOption element='Shop Products' Icon={RiShoppingBag2Fill}/>
                 </div>
-                <div>
+                <div ref={(ref)=>{
+                  if (ref) {connectors.create(ref, <DraggableFooter/>)}
+                }}>
                   <ElementOption element='Footer' Icon={BiSolidDockBottom}/>
                 </div>
             </div>
           </div>
       </div>
-
       </ScrollArea>
+      </TabsContent>
+      <TabsContent value='layers'>
+        <ScrollArea className=' h-[600px]'>
+          <Layers renderLayer={Layer}/>
+        </ScrollArea>
+      </TabsContent>
+      </Tabs>
     </div>
   )
 }
@@ -160,3 +179,4 @@ const ElementOption = ({  element, Icon } : ElementOption) => {
   </div>
   )
 }
+

@@ -26,6 +26,8 @@ import Socials from './draggableComponents/socials';
 import BackgroundImage from './draggableComponents/backgroundImage';
 import Image from 'next/image';
 import ShopProducts from './draggableComponents/shopProducts';
+import DraggableFooter from './draggableComponents/draggableFooter';
+import DraggableSocials from './draggableComponents/draggableSocials';
 
 export default function MailSparkEditor() {
   const [session, setSession] = useState<null | EditorSession>(null);
@@ -60,7 +62,7 @@ export default function MailSparkEditor() {
  if (sessionId && session   ) {
   return (
     <div className="flex flex-col h-screen ">
-      <Editor  resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer, Hero, CustomisableContainer, Testimonials, MdOutlineStarPurple500, Socials, BackgroundImage, Image, ShopProducts }}>
+      <Editor  resolver={{ Text, Container, Button, DraggableButton, DraggableImage, TwoColumns, Placeholder, Column, ThreeColumns, CanvasContainer, Hero, CustomisableContainer, Testimonials, MdOutlineStarPurple500, DraggableSocials, BackgroundImage, Image, ShopProducts, DraggableFooter }}>
         <Navbar  session={session} />
         <div className="flex flex-grow">
           <LeftSideBar />

@@ -39,7 +39,7 @@ const { connectors: {connect, drag}, hasSelectedNode, hasDraggedNode , actions: 
          marginBottom: `${marginB}px`,
          marginRight: `${marginR}px`,
          marginLeft: `${marginl}px` }} className=' bg-slate-200 rounded-xl h-full '>
-            <div style={{height: height}} className=' flex justify-center  items-center'>
+            <div style={{height: `${height}px`, width:`${width}px`, display:'flex', justifyContent:'center' ,alignContent: 'center', alignItems:'center'}} >
                 <IoImageOutline className=' text-gray-400 h-16 w-16' />
             </div>
          </div>
