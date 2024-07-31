@@ -27,7 +27,11 @@ export default function SideEditProduct( { isShow, setIsShow, selectedProduct } 
 
     const fetchData = async ()=>{
         setLoading(true)
-        const prod : Product = await fetchProductById(selectedProduct)
+        const prod : Product | any = await fetchProductById(selectedProduct);
+        if (prod.error) {
+            toast.error(prod.error)
+            return
+        }
         setDescription(prod.description)
         setTitle(prod.product_name)
         setPrice(prod.price)

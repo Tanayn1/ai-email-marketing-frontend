@@ -7,6 +7,7 @@ import { toast } from 'sonner';
 import CreateNewBrandModal from './createNewBrandModal';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function Brands() {
     const [brands, setBrands] = useState<null | Array<Brand>>(null);
@@ -35,14 +36,13 @@ export default function Brands() {
                     </div>
                 </div>
                 {brands?.map((brand, index)=>{
-                   
                     return (
                         <div key={index} onClick={()=>{router.push(`/dashboard/brands/brand?id=${brand.id}`)}} className=' glass-container hover:opacity-45 cursor-pointer rounded-xl w-[250px] h-[150px]'>
                             <div className=' flex flex-col items-center'>
-                                { 
-                                isSvg(brand.logo!) ? <RenderHTML htmlString={brand.logo!}/> :
-                                    <Image alt={`logo ${index}`} src={brand.logo!} width={100} height={100}/>
-                                    }
+                                {
+                                    brand.logos.length === 0 ? <Skeleton className=' h-[100px] w-[100px]'/> : 
+                                    <Image alt={`logo ${index}`} src={brand.logos[0]} width={100} height={100}/>                              
+                                } 
                                 <h1 className=' text-xl font-semibold'>{brand.brand_name}</h1> 
                             </div>
                         </div>

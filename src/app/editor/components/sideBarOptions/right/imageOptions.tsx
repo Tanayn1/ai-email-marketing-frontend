@@ -27,7 +27,7 @@ export default function ImageOptions({ actions, selected, product_id } : ImageOp
     const [images, setImages] = useState<Array<string>>([]);
     const [logos, setLogos] = useState<string[]>([]);
     const fetchImages = async ()=>{
-        const data  = await fetchProductById(product_id);
+        const data : any  = await fetchProductById(product_id);
         if (data) setImages(data.images);
     }
 

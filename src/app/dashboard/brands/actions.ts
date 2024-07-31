@@ -1,7 +1,7 @@
 'use server'
 
 import { cookies } from "next/headers";
-import { Brand, Product } from "../../../../types/types";
+import { Brand, Colors, Fonts, Product } from "../../../../types/types";
 
 export async function fetchBrands() {
     try {
@@ -126,6 +126,8 @@ export async function fetchProductById(prodId : string) {
         const data = await response.json()
         if (response.ok) {
             return data.product as Product
+        } else {
+            return { error: data.message }
         }
     } catch (error) {
         console.log(error)
@@ -160,3 +162,71 @@ export async function updateProduct(product_id : string, price : string, product
     }
 
 }
+
+export async function addLogoToLogos(formData: FormData, brandId: string) {
+    try {
+        const token = cookies().get('Token')?.value;
+        const response = await fetch(`${process.env.BACKEND_URL}/aws/uploadToS3`,{
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            body: formData
+        });
+        const data = await response.json()
+        if (response.ok) {
+            const url = data.src
+            const response2 = await fetch(`${process.env.BACKEND_URL}/brands/addLogo`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    brandId: brandId,
+                    logo: url
+                })
+            });
+            const data2 = await response2.json();
+            if (response2.ok) {
+                return data.src
+
+            } else {
+                return { error: data2.message }
+            }
+        } else {
+            return { error: data.message }
+        }
+    } catch (error) {
+        
+    }
+}
+
+export async function updateBrands(brand_id: string, brand_name: string, 
+    colors: Colors, fonts: Fonts, logos: string[]) {
+        try {
+            const token = cookies().get('Token')?.value;
+            const response = await fetch(`${process.env.BACKEND_URL}/brands/updateBrand`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    brandName: brand_name,
+                    logos: logos,
+                    fonts: fonts,
+                    colors: colors,
+                    brandId: brand_id
+                })
+            });
+            const data = await response.json();
+
+            if (response.ok) {
+                return data.updateBrand
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+    }

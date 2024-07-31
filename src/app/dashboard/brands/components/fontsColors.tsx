@@ -55,9 +55,9 @@ export default function FontsColors({ brand } : FontsColors) {
                 <h1 className=' font-semibold text-xl mt-4'>Colors</h1>
                 <div className=' mt-1'>
                     <div className=' flex flex-col items-center h-[200px] w-[200px] rounded-xl border border-zinc-700'>
-                        <div style={{background: brand.colors.colors.primaryColor}} className={` mt-3 rounded-full w-[100px] h-[100px] border border-zinc-700 `}>
+                        <div style={{background: brand.colors.buttonColor}} className={` mt-3 rounded-full w-[100px] h-[100px] border border-zinc-700 `}>
                         </div>
-                        <h1 className=' text-sm my-3'>{brand.colors.colors.primaryColor}</h1>
+                        <h1 className=' text-sm my-3'>{brand.colors.buttonColor}</h1>
                         <Button variant={'outline'} className={`  hover:bg-white hover:text-black bg-zinc-800 text-zinc-400 shadow  border-zinc-700   `}>
                             <PencilIcon/>
                         </Button>

@@ -45,7 +45,7 @@ export default function Brand() {
               <Products brandId={brandId}/>
             </TabsContent>
             <TabsContent value='logos'>
-              <Logos/>
+              <Logos logos={brand.logos} brand={brand} brandId={brandId}/>
             </TabsContent>
             <TabsContent value='fonts & colors'>
               <FontsColors brand={brand}/>

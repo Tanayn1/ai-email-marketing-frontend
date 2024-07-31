@@ -3,7 +3,7 @@ export interface Brand {
     id: string,
     brand_name: string
     brand_url: string | null,
-    logo: string | null,
+    logos: string[]
     colors: Colors,
     fonts: Fonts,
     created_at: string
@@ -41,17 +41,23 @@ export interface Fonts {
     secondaryFont: string
 }
 
-export interface Colors {
-    colors: {
-        primaryColor: string,
-        secondaryColors: Array<any>
-    },
-    backgroundColors: {        
-        primaryColor: string,
-        secondaryColors: Array<any>
-    }
-}
+// export interface Colors {
+//     colors: {
+//         primaryColor: string,
+//         secondaryColors: Array<any>
+//     },
+//     backgroundColors: {        
+//         primaryColor: string,
+//         secondaryColors: Array<any>
+//     }
+// }
 
+export interface Colors {
+    textColor: string,
+    buttonColor: string,
+    backgroundColor: string,
+    secondaryBackgroundColor: string
+}
 
 
 export interface ESPKey {
