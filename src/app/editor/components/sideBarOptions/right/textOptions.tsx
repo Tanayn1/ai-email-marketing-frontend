@@ -14,6 +14,8 @@ import {
 import { MdOutlineFormatBold } from 'react-icons/md'
 import { GradientPicker } from '@/components/colorPicker'
 import FontsDropdown from './components/fontsDropdown'
+import { Options } from '@/app/editor/types/types'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 interface TextOptions {
     actions: WithoutPrivateActions<null>,
@@ -26,8 +28,9 @@ interface TextOptions {
     } | undefined
 }
 
-export default function TextOptions({ actions, selected } : TextOptions) {
+export default function TextOptions({ actions, selected, session_id } : Options) {
  if (selected) return (
+    <ScrollArea className=' h-[600px]'>
     <div className=''>
       <div className=' mt-3'>
         <h1 className=' text-sm font-semibold mb-2'>Content</h1>
@@ -80,7 +83,7 @@ export default function TextOptions({ actions, selected } : TextOptions) {
         </div>
         <div className=' mt-3'>
             <h1 className=' text-xs font-medium text-zinc-200 mb-2'>Text Color</h1>
-            <GradientPicker background={selected.props.textColor} setBackground={(color)=>{actions.setProp(selected.id, (props)=>{props.textColor = color})}}/>
+            <GradientPicker sessionId={session_id!} background={selected.props.textColor} setBackground={(color)=>{actions.setProp(selected.id, (props)=>{props.textColor = color})}}/>
         </div>
         <div className=' mt-3'>
             <h1 className=' text-xs font-medium text-zinc-200 mb-2'>Font Family</h1>
@@ -98,8 +101,20 @@ export default function TextOptions({ actions, selected } : TextOptions) {
                     <input value={selected.props.paddingB} onChange={(e)=>{actions.setProp(selected.id, (props)=>{props.paddingB = e.target.value })}} type="number" inputMode='numeric' className=' text-xs placeholder:text-sm w-[30px] focus:outline-none bg-zinc-900 placeholder:text-zinc-500 text-center' placeholder='B' />
                 </div>
             </div>
+            </div>
+            <h1 className=' text-xs font-medium text-zinc-200 mt-3 mb-2'>Margin</h1>
+            <div className=' border border-zinc-700 rounded-lg'>
+                <div className=' flex flex-col items-center m-3'>
+                    <input value={selected.props.marginT} onChange={(e)=>{actions.setProp(selected.id, (props)=>{props.marginT = e.target.value })}} type="number"  inputMode='numeric' className=' text-xs placeholder:text-sm w-[30px] focus:outline-none bg-zinc-900 placeholder:text-zinc-500 text-center' placeholder='T' />
+                    <div className=' flex justify-between w-full'>
+                    <input value={selected.props.marginl} onChange={(e)=>{actions.setProp(selected.id, (props)=>{props.marginl = e.target.value })}} type="number" inputMode='numeric' className=' text-xs placeholder:text-sm w-[30px] focus:outline-none bg-zinc-900 placeholder:text-zinc-500 text-center' placeholder='L' />
+                    <input value={selected.props.marginR} onChange={(e)=>{actions.setProp(selected.id, (props)=>{props.marginR = e.target.value })}} type="number" inputMode='numeric' className=' text-xs placeholder:text-sm w-[30px] focus:outline-none bg-zinc-900 placeholder:text-zinc-500 text-center' placeholder='R' />
+                </div>
+                    <input value={selected.props.marginB} onChange={(e)=>{actions.setProp(selected.id, (props)=>{props.marginB = e.target.value })}} type="number" inputMode='numeric' className=' text-xs placeholder:text-sm w-[30px] focus:outline-none bg-zinc-900 placeholder:text-zinc-500 text-center' placeholder='B' />
+            </div>            
         </div>
   </div>
+  </ScrollArea>
   )
 }
 

@@ -15,11 +15,15 @@ interface Text {
     paddingT: number,
     paddingB: number, 
     paddingl: number,
-    paddingR: number
+    paddingR?: number,
+    marginT?: number,
+    marginB?: number, 
+    marginl?: number,
+    marginR?: number,
 }
 
 
-export const Text = ({text, fontSize, align, italic, fontWeight, textColor, fontFamily, paddingT, paddingB, paddingR, paddingl} : Text) => {
+export const Text = ({text, fontSize, align, italic, fontWeight, textColor, fontFamily, paddingT, paddingB, paddingR, paddingl, marginT, marginB, marginl, marginR} : Text) => {
   const { connectors: {connect, drag}, hasSelectedNode, hasDraggedNode , actions: {setProp} } = useNode((state)=>({
     hasSelectedNode: state.events.selected,
     hasDraggedNode: state.events.dragged,
@@ -41,7 +45,11 @@ export const Text = ({text, fontSize, align, italic, fontWeight, textColor, font
       overflow: 'hidden', // Prevents overflowing content
       textOverflow: 'ellipsis', // Adds ellipsis (...) for overflowing text
 
-      outline: hasSelectedNode ? '2px solid black' : 'none'
+      outline: hasSelectedNode ? '2px solid black' : 'none',
+      marginTop: `${marginT}px`,
+      marginBottom: `${marginB}px`,
+      marginRight: `${marginR}px`,
+      marginLeft: `${marginl}px`,
       }}
     >
       <p
@@ -62,7 +70,8 @@ export const Text = ({text, fontSize, align, italic, fontWeight, textColor, font
         overflow: 'hidden', // Prevents overflowing content
         textOverflow: 'ellipsis', // Adds ellipsis (...) for overflowing text
         maxWidth: '100%', // Ensures the element does not exceed the container width
-        textAlign: align
+        textAlign: align,
+
       }}
       >{text}</p>
     </div>

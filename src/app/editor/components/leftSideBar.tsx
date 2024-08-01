@@ -77,36 +77,36 @@ export default function LeftSideBar() {
           <h1 className=' text-lg font-semibold mb-2'>Layouts</h1>
           <div className=' grid grid-cols-2 gap-2'>
                 <div ref={(ref)=>{
-                  if (ref) {connectors.create(ref, <TwoColumns borderRadius={0} paddingT={10} paddingR={10} paddingl={10} paddingB={10} marginT={0} marginB={0} marginR={0} marginl={0} backgroundColor='#ffffff' align='space-evenly'/>)}
+                  if (ref) {connectors.create(ref, <TwoColumns borderRadius={0} paddingT={10} paddingR={10} paddingl={10} paddingB={10} marginT={0} marginB={0} marginR={0} marginl={0} backgroundColor='' align='space-evenly'/>)}
                 }}>
                   <ElementOption element='Two Columns' Icon={TbColumns2}/>
                 </div>
                 <div ref={(ref)=>{
-                    if (ref) {connectors.create(ref, <ThreeColumns borderRadius={0} paddingT={10} paddingR={0} paddingl={0} paddingB={10} marginT={0} marginB={0} marginR={0} marginl={0} backgroundColor='#ffffff' align='space-evenly'/>)}
+                    if (ref) {connectors.create(ref, <ThreeColumns borderRadius={0} paddingT={10} paddingR={0} paddingl={0} paddingB={10} marginT={0} marginB={0} marginR={0} marginl={0} backgroundColor='' align='space-evenly'/>)}
                 }}>
                   <ElementOption element='Three Columns' Icon={TbColumns3}/>
                 </div>
                 <div ref={(ref)=>{
                     if (ref) {connectors.create(ref, <TwoColumns borderRadius={0} rightText='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' leftText='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' 
-                      paddingT={10} paddingR={0} paddingl={0} paddingB={10} marginT={0} marginB={0} marginR={20} marginl={20} backgroundColor='#ffffff' align='space-evenly' leftWidth='70%' rightWidth='30%' columnLeftPaddingR={30}/>)}
+                      paddingT={10} paddingR={0} paddingl={0} paddingB={10} marginT={0} marginB={0} marginR={20} marginl={20} backgroundColor='' align='space-evenly' leftWidth='70%' rightWidth='30%' columnLeftPaddingR={30}/>)}
                 }}>
                   <ElementOption element='Right Sidebar' Icon={BsLayoutSidebarInsetReverse}/>
                 </div>
                 <div ref={(ref)=>{
                     if (ref) {connectors.create(ref, <TwoColumns borderRadius={0} rightText='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' 
                       leftText='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' 
-                      paddingT={10} paddingR={0} paddingl={0} paddingB={10} marginT={0} marginB={0} marginR={20} marginl={20} backgroundColor='#ffffff' align='space-evenly' leftWidth='30%' rightWidth='70%' columnRightPaddingL={30}/>)}
+                      paddingT={10} paddingR={0} paddingl={0} paddingB={10} marginT={0} marginB={0} marginR={20} marginl={20} backgroundColor='' align='space-evenly' leftWidth='30%' rightWidth='70%' columnRightPaddingL={30}/>)}
                   }}>
                   <ElementOption element='Left Sidebar' Icon={BsLayoutSidebarInset}/>
                 </div>
                 <div ref={(ref)=>{
                     if (ref) {connectors.create(ref, <TwoColumns borderRadius={0} article={true} rightText='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' leftText='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' 
-                      paddingT={10} paddingR={0} paddingl={0} paddingB={10} marginT={0} marginB={0} marginR={20} marginl={20} backgroundColor='#ffffff' align='space-evenly' leftWidth='70%' rightWidth='30%' columnLeftPaddingR={30}/>)}
+                      paddingT={10} paddingR={0} paddingl={0} paddingB={10} marginT={0} marginB={0} marginR={20} marginl={20} backgroundColor='' align='space-evenly' leftWidth='70%' rightWidth='30%' columnLeftPaddingR={30}/>)}
                 }}>
                   <ElementOption element='Article' Icon={IoNewspaperOutline}/>
                 </div>
                 <div ref={(ref)=>{
-                  if (ref) {connectors.create(ref, <Element id='container'  marginT={0} marginB={0} marginR={0} marginl={0} height={200} width={200} paddingT={0} paddingR={0} paddingl={0} paddingB={0} alignX='center' alignY='center' flexDirection='row' backgroundColor='#ffffff' borderRadius={0} is={CustomisableContainer}  canvas/>)}
+                  if (ref) {connectors.create(ref, <Element id='container'  marginT={0} marginB={0} marginR={0} marginl={0} height={200} width={200} paddingT={0} paddingR={0} paddingl={0} paddingB={0} alignX='center' alignY='center' flexDirection='row' backgroundColor='' borderRadius={0} is={CustomisableContainer}  canvas/>)}
                 }}>
                   <ElementOption element='Container' Icon={TbContainer}/>
                 </div>
@@ -130,12 +130,12 @@ export default function LeftSideBar() {
                 }}> 
                   <ElementOption element='Socials' Icon={AiOutlineLike}/>
                 </div>
-                <div ref={(ref)=>{
+                {/* <div ref={(ref)=>{
                     if (ref) {connectors.create(ref, <BackgroundImage marginT={0} marginB={0} marginR={0} marginl={0} 
                       height={700} src='https://easy-email-m-ryan.vercel.app/images/acbae5eb-efa4-4eb6-866c-f421e740b713-ad3c92b1-9cdb-4a7b-aad3-75ad809db8a3.png'/>)}
                 }}>
                   <ElementOption element='Image Background' Icon={TbBackground}/>
-                </div>
+                </div> */}
                 <div ref={(ref)=>{
                     if (ref) {connectors.create(ref, <ShopProducts/>)}
                 }}>

@@ -92,7 +92,7 @@ export default function Navbar({ session} : Navbar) {
             {saveLoading ? <Loader2Icon className=' animate-spin'/> : 'Save'}
           </Button>
           <Button onClick={()=>{captureImage()}}>Image</Button>
-          <Button onClick={()=>{exportHTML()}}>Temporary ting</Button>
+          <Button onClick={()=>{console.log(query.serialize())}}>Temporary ting</Button>
         </div>
     </div>
   )

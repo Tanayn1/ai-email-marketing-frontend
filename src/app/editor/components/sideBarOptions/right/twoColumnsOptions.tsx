@@ -8,7 +8,7 @@ import { CgSpaceBetween } from 'react-icons/cg'
 import { CiAlignCenterH, CiAlignLeft, CiAlignRight } from 'react-icons/ci'
 import { RxSpaceBetweenHorizontally, RxSpaceEvenlyHorizontally } from 'react-icons/rx'
 
-export default function TwoColumnsOptions({ actions, selected } : Options) {
+export default function TwoColumnsOptions({ actions, selected, session_id } : Options) {
  if (selected) return (
     <div className=' '>
         <div className=' mt-4' >
@@ -44,7 +44,7 @@ export default function TwoColumnsOptions({ actions, selected } : Options) {
           </div>
           <div className=' mt-4'>
           <h1 className=' text-sm font-semibold mb-2'>Background Color</h1>
-            <GradientPicker className=' text-xs ' background={selected.props.backgroundColor} setBackground={(value)=>{actions.setProp(selected.id, (props)=>{props.backgroundColor = value})}}/>
+            <GradientPicker sessionId={session_id!} className=' text-xs ' background={selected.props.backgroundColor} setBackground={(value)=>{actions.setProp(selected.id, (props)=>{props.backgroundColor = value})}}/>
           </div>
           <div className=' mt-4'>
               <h1 className=' text-sm font-semibold mb-2'>Border Radius</h1>

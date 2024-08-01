@@ -9,7 +9,7 @@ import React from 'react'
 import { CiAlignBottom, CiAlignCenterH, CiAlignCenterV, CiAlignLeft, CiAlignRight, CiAlignTop, CiGrid2H, CiGrid2V } from 'react-icons/ci'
 import { MdWidthFull } from 'react-icons/md'
 
-export default function CustomisableContainerOptions({ actions, selected } : Options) {
+export default function CustomisableContainerOptions({ actions, selected, session_id } : Options) {
     const setAlign = (value : 'start' | 'center' | 'end', option : 'x' | 'y')=>{
         if (selected?.props.flexDirection === 'row' && option === 'x') {
             actions.setProp(selected.id, (props)=>{props.alignX = value})
@@ -65,7 +65,7 @@ export default function CustomisableContainerOptions({ actions, selected } : Opt
         </div>
         <div className=' mt-4'>
         <h1 className=' text-sm font-semibold mb-2'>Background</h1>
-        <GradientPicker className=' text-xs ' background={selected.props.backgroundColor} setBackground={(value)=>{actions.setProp(selected.id, (props)=>{props.backgroundColor = value})}}/>
+        <GradientPicker sessionId={session_id!} className=' text-xs ' background={selected.props.backgroundColor} setBackground={(value)=>{actions.setProp(selected.id, (props)=>{props.backgroundColor = value})}}/>
 
         </div>
         <div className=' mt-4'>

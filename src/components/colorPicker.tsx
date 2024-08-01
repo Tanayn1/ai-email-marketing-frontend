@@ -8,32 +8,41 @@ import {
   PopoverTrigger,
 } from './ui/popover'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Paintbrush } from 'lucide-react'
+import { Paintbrush, PlusIcon } from 'lucide-react'
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { cn } from '@/lib/utils'
+import { addFileToAssets, fetchAssets } from './actions'
+import { toast } from 'sonner'
+import { RxValueNone } from 'react-icons/rx'
+import { IoIosColorPalette } from "react-icons/io";
+import GradientSelector from './ui/gradientSelector'
+import { ScrollArea } from './ui/scroll-area'
 
-export function PickerExample() {
-  const [background, setBackground] = useState('#B4D455')
 
-  return (
-    <div
-      className="w-full h-full preview flex min-h-[350px] justify-center p-10 items-center rounded !bg-cover !bg-center transition-all"
-      style={{ background }}
-    >
-      <GradientPicker background={background} setBackground={setBackground} />
-    </div>
-  )
-}
+// export function PickerExample() {
+//   const [background, setBackground] = useState('#B4D455')
+
+//   return (
+//     <div
+//       className="w-full h-full preview flex min-h-[350px] justify-center p-10 items-center rounded !bg-cover !bg-center transition-all"
+//       style={{ background }}
+//     >
+//       <GradientPicker background={background} setBackground={setBackground} />
+//     </div>
+//   )
+// }
 
 export function GradientPicker({
   background,
   setBackground,
   className,
+  sessionId
 }: {
   background: string
   setBackground: (background: string) => void
-  className?: string
+  className?: string,
+  sessionId: string
 }) {
   const solids = [
     '#E2E2E2',
@@ -65,7 +74,7 @@ export function GradientPicker({
     'linear-gradient(to top left,#ff75c3,#ffa647,#ffe83f,#9fff5b,#70e2ff,#cd93ff)',
   ]
 
-  const images = [
+  const images  = [
     'url(https://images.unsplash.com/photo-1691200099282-16fd34790ade?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=90)',
     'url(https://images.unsplash.com/photo-1691226099773-b13a89a1d167?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=90',
     'url(https://images.unsplash.com/photo-1688822863426-8c5f9b257090?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=90)',
@@ -76,7 +85,33 @@ export function GradientPicker({
     if (background.includes('url')) return 'image'
     if (background.includes('gradient')) return 'gradient'
     return 'solid'
-  }, [background])
+  }, [background]);
+  
+  const [assets, setAssets] = useState<string[]>([]);
+  const [customColor, setCustomColor] = useState<string>('#ffffff')
+
+
+  const fetchData = async ()=>{
+    const assets = await fetchAssets(sessionId);
+    setAssets(assets)
+  }
+
+    const handleUploadImage = async (e: React.ChangeEvent<HTMLInputElement>)=>{
+      const formData = new FormData
+      if (e.target.files) {
+          formData.append('file', e.target.files[0]);
+          const response = await addFileToAssets(formData, sessionId)
+          if (response?.url) {
+            setAssets([...assets, response.url]);
+            setBackground(`url(${response.url})`)
+          } else if (response?.error) {
+            toast.error(response.error)
+          }
+      }
+    }
+  useEffect(()=>{
+    fetchData();
+  },[])
 
   return (
     <Popover>
@@ -113,12 +148,27 @@ export function GradientPicker({
             <TabsTrigger className="flex-1" value="gradient">
               Gradient
             </TabsTrigger>
-            <TabsTrigger className="flex-1" value="image">
+            {/* <TabsTrigger className="flex-1" value="image">
               Image
-            </TabsTrigger>
+            </TabsTrigger> */}
           </TabsList>
 
-          <TabsContent value="solid" className="flex flex-wrap gap-1 mt-0">
+          <TabsContent value="solid" >
+            <div className="flex flex-wrap gap-1 mt-0">
+            <div
+                //style={{ background: '' }}
+                className="rounded-md h-6 w-6 flex justify-center bg-zinc-900 items-center cursor-pointer active:scale-105 border border-zinc-600"
+                onClick={() => setBackground('')}
+              >
+                <RxValueNone className=' text-zinc-600'/>
+              </div>
+              <div className=' relative'>
+              <input type="color" className='absolute opacity-0 w-0 h-0'  name="" id="color-picker" onChange={(e)=>{setBackground(e.target.value), setCustomColor(e.target.value)}} />
+              <label htmlFor="color-picker"
+              style={{ backgroundColor: customColor  }}
+              className="rounded-md h-6 w-6 flex justify-center bg-zinc-900 items-center cursor-pointer active:scale-105 border border-zinc-600"
+              ><IoIosColorPalette className=' text-zinc-600'/></label>
+            </div>
             {solids.map((s) => (
               <div
                 key={s}
@@ -127,21 +177,31 @@ export function GradientPicker({
                 onClick={() => setBackground(s)}
               />
             ))}
+            </div>
+            <div>
+              <h1 className='text-zinc-400 text-xs font-semibold mb-2 mt-3'>My Color Pallete</h1>
+            </div>
+
           </TabsContent>
 
           <TabsContent value="gradient" className="mt-0">
+            <ScrollArea className=' h-[100px]'>
             <div className="flex flex-wrap gap-1 mb-2">
               {gradients.map((s) => (
                 <div
                   key={s}
-                  style={{ background: s }}
+                  style={{ background: s,  }}
                   className="rounded-md h-6 w-6 cursor-pointer active:scale-105"
                   onClick={() => setBackground(s)}
                 />
               ))}
             </div>
+            <div>
+              <GradientSelector setBackground={(value: string)=>{setBackground(value)}}/>
+            </div>
+            </ScrollArea>
 
-            <GradientButton background={background}>
+            {/* <GradientButton background={background}>
               💡 Get more at{' '}
               <Link
                 href="https://gradient.page/css/ui-gradients"
@@ -150,22 +210,38 @@ export function GradientPicker({
               >
                 Gradient Page
               </Link>
-            </GradientButton>
+            </GradientButton> */}
           </TabsContent>
 
           <TabsContent value="image" className="mt-0">
             <div className="grid grid-cols-2 gap-1 mb-2">
-              {images.map((s) => (
+              <div className="relative">
+              {/* Hidden file input */}
+                <input
+                type="file"
+                id="file-upload"
+                className="hidden"
+                onChange={(e)=>{handleUploadImage(e)}}
+                />
+                {/* Label styled as a button */}
+                <label
+                  htmlFor="file-upload"
+                  className="rounded-md  bg-cover bg-zinc-800 bg-center h-12 w-full cursor-pointer active:scale-105 flex items-center justify-center"
+                >
+                  <PlusIcon className='text-white'/>
+                </label>
+              </div>
+              {assets.map((s) => (
                 <div
                   key={s}
-                  style={{ backgroundImage: s }}
-                  className="rounded-md bg-cover bg-center h-12 w-full cursor-pointer active:scale-105"
-                  onClick={() => setBackground(s)}
+                  style={{ backgroundImage: `url(${encodeURI(s)})` }}
+                  //className="rounded-md bg-cover bg-center h-12 w-full cursor-pointer active:scale-105"
+                  onClick={() => setBackground(`url(${s})`)}
                 />
               ))}
             </div>
 
-            <GradientButton background={background}>
+            {/* <GradientButton background={background}>
               🎁 Get abstract{' '}
               <Link
                 href="https://gradient.page/wallpapers"
@@ -174,7 +250,7 @@ export function GradientPicker({
               >
                 wallpapers
               </Link>
-            </GradientButton>
+            </GradientButton> */}
           </TabsContent>
 
           <TabsContent value="password">Change your password here.</TabsContent>

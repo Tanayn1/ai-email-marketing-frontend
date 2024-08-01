@@ -73,7 +73,7 @@ export default function MailSparkEditor() {
               </Frame>
             </div>
           </div>
-          <RightSideBar product_id={session.product_id} />
+          <RightSideBar session_id={sessionId} product_id={session.product_id} />
         </div>
       </Editor>
     </div>

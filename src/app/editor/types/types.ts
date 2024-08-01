@@ -10,4 +10,5 @@ export interface Options {
         isDeletable: boolean;
         props: Record<string, any>;
     } | undefined
+    session_id?: string
 }

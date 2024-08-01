@@ -13,7 +13,7 @@ import { Options } from '@/app/editor/types/types'
 
 //add fonts tho
 
-export default function ButtonOptions({ actions, selected } : Options) {
+export default function ButtonOptions({ actions, selected, session_id } : Options) {
 if (selected) return (
   <ScrollArea className=' h-[500px] '>
     <div className=''>
@@ -41,7 +41,7 @@ if (selected) return (
         <div className=' flex items-center gap-6'>
           <div>
             <h1 className=' text-xs font-medium text-zinc-200  mb-2'>Button Color</h1>
-            <GradientPicker className=' text-xs w-[140px]' background={selected.props.backgroundColor} setBackground={(value)=>{actions.setProp(selected.id, (props)=>{props.backgroundColor = value})}}/>
+            <GradientPicker sessionId={session_id!} className=' text-xs w-[140px]' background={selected.props.backgroundColor} setBackground={(value)=>{actions.setProp(selected.id, (props)=>{props.backgroundColor = value})}}/>
           </div>
           <div>
             <h1 className=' text-xs font-medium text-zinc-200   mb-2'>Text Color</h1>

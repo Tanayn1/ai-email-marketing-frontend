@@ -13,9 +13,10 @@ import SocialOptions from './sideBarOptions/right/socialOptions';
 import BackgroundImageOptions from './sideBarOptions/right/backgroundImageOptions';
 
 interface RightSideBar {
-  product_id: string
+  product_id: string,
+  session_id: string
 }
-export default function RightSideBar({ product_id } : RightSideBar) {
+export default function RightSideBar({ product_id, session_id } : RightSideBar) {
   const { actions, selected } = useEditor((state, query) => {
     const [currentNodeId] : any = state.events.selected;
     let selected;
@@ -42,15 +43,14 @@ export default function RightSideBar({ product_id } : RightSideBar) {
         </div>
         {selected ? 
         <div className=' mx-10 mb-10 mt-3'>
-          {selected.name === 'Text' && <TextOptions selected={selected} actions={actions}/>}
-          {selected.name === 'DraggableButton' && <ButtonOptions selected={selected} actions={actions}/>}
+          {selected.name === 'Text' && <TextOptions session_id={session_id} selected={selected} actions={actions}/>}
+          {selected.name === 'DraggableButton' && <ButtonOptions session_id={session_id} selected={selected} actions={actions}/>}
           {selected.name === 'DraggableImage' && <ImageOptions selected={selected} actions={actions} product_id={product_id}/>}
-          {selected.name === 'TwoColumns' && <TwoColumnsOptions selected={selected} actions={actions}/>}
-          {selected.name === 'ThreeColumns' && <TwoColumnsOptions selected={selected} actions={actions}/>}
-          {selected.name === 'CustomisableContainer' && <CustomisableContainerOptions selected={selected} actions={actions}/>}
-          {selected.name === 'CanvasContainer' && <CanvasContainerOptions selected={selected} actions={actions}/>}
+          {selected.name === 'TwoColumns' && <TwoColumnsOptions session_id={session_id} selected={selected} actions={actions}/>}
+          {selected.name === 'ThreeColumns' && <TwoColumnsOptions session_id={session_id} selected={selected} actions={actions}/>}
+          {selected.name === 'CustomisableContainer' && <CustomisableContainerOptions session_id={session_id} selected={selected} actions={actions}/>}
+          {selected.name === 'CanvasContainer' && <CanvasContainerOptions session_id={session_id} selected={selected} actions={actions}/>}
           {selected.name === 'Socials' && <SocialOptions selected={selected} actions={actions}/>}
-          {selected.name === 'BackgroundImage' && <BackgroundImageOptions selected={selected} actions={actions}/>}
 
           {selected.isDeletable && 
             <Button className=' gap-1 mt-5 w-full text-xs bg-red-800 bg-opacity-20 hover:bg-white hover:text-black text-red-500' onClick={()=>{actions.delete(selected.id)}}>
