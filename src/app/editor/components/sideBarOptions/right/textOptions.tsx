@@ -30,7 +30,7 @@ interface TextOptions {
 
 export default function TextOptions({ actions, selected, session_id } : Options) {
  if (selected) return (
-    <ScrollArea className=' h-[600px]'>
+    <ScrollArea className=' h-[500px]'>
     <div className=''>
       <div className=' mt-3'>
         <h1 className=' text-sm font-semibold mb-2'>Content</h1>

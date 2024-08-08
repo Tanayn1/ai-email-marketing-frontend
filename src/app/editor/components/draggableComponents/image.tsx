@@ -28,7 +28,7 @@ const { connectors: {connect, drag}, hasSelectedNode, hasDraggedNode , actions: 
         
         {
         src ? 
-        <Image alt='' src={src} width={width} height={height} style={{outline: hasSelectedNode ? '2px solid black' : 'none',        
+        <img alt='' src={src} width={width} height={height} style={{outline: hasSelectedNode ? '2px solid black' : 'none',        
         marginTop: `${marginT}px`,
         marginBottom: `${marginB}px`,
         marginRight: `${marginR}px`,

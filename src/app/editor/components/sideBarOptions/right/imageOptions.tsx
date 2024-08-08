@@ -75,7 +75,7 @@ export default function ImageOptions({ actions, selected, product_id } : ImageOp
             <h1 className=' text-sm font-semibold mb-2'>Image Source</h1>
             <Input onChange={(e)=>{handleUploadImage(e)}} className=' file:text-zinc-400 file:text-xs bg-zinc-900 text-white placeholder:text-white text-xs' type='file'/>
             
-            <Input disabled value={selected.props.src} className=' bg-zinc-900 my-3' 
+            <Input  value={selected.props.src} className=' bg-zinc-900 my-3' 
             onChange={(e)=>{actions.setProp(selected.id, (props)=>{props.src = e.target.value})}}
             onPaste={(e)=>{actions.setProp(selected.id, (props)=>{props.src = selected.props.src + e.clipboardData })}}
             />
